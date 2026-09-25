@@ -3,7 +3,7 @@ import {mkdir,readFile} from 'node:fs/promises';
 import {spawn} from 'node:child_process';
 import {chromium} from 'playwright';
 import {QUESTIONS,CATEGORIES} from '../src/questions.js';
-import {newGame,validSave} from '../src/engine.js';
+import {newGame,validSave,edge,exits} from '../src/engine.js';
 const out='test-results';await mkdir(out,{recursive:true});
 const server=spawn(process.execPath,['scripts/serve.mjs'],{stdio:['ignore','pipe','inherit']});
 await new Promise((resolve,reject)=>{server.stdout.once('data',resolve);server.once('error',reject);server.once('exit',code=>reject(new Error(`Server exited ${code}`)));});
@@ -21,6 +21,21 @@ try{
  await page.screenshot({path:`${out}/castle.png`,fullPage:true});
  checks.push('Start a named journey; desktop castle renders');
  const state=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('remindmaze.lanternlight.v1')));
+ async function openQuestion(){
+  const current=await state(),queue=[[current.pos]],seen=new Set([current.pos]);let route;
+  for(let i=0;i<queue.length;i++){
+   const path=queue[i],room=path.at(-1);
+   if(current.maze[room].some(n=>!current.unlocked.includes(edge(room,n)))){route=path;break;}
+   for(const n of current.maze[room])if(current.unlocked.includes(edge(room,n))&&!seen.has(n)){seen.add(n);queue.push([...path,n]);}
+  }
+  assert.ok(route,'An unlocked route should lead to a new question');
+  for(const to of route.slice(1)){
+   const door=exits(await state()).find(d=>d.to===to);
+   await page.getByRole('button',{name:`Walk ${door.label.toLowerCase()} door`,exact:true}).click();
+  }
+  await page.locator('#door-hotspots button[aria-label^="Unlock"]').first().click();
+ }
+
  const start=await state();
  await page.locator('#direction-buttons button').first().click();
  const prompt=await page.locator('#question-title').innerText(),q=QUESTIONS.find(q=>q.prompt===prompt);assert.ok(q);
@@ -36,13 +51,7 @@ try{
  const delta=start.pos-moved.pos,dir=delta===-10?'North':delta===10?'South':delta===1?'East':'West';
  await page.locator('#direction-buttons').getByRole('button',{name:new RegExp(dir)}).click();assert.equal((await state()).pos,start.pos);assert.equal((await state()).score,earned);assert.equal(await page.locator('#question-dialog').isVisible(),false);
  checks.push('Correct answer opens a door; backtracking is free');
- const locked=await page.locator('#door-hotspots button[aria-label^="Unlock"]').count();
- if(locked){
-  await page.locator('#door-hotspots button[aria-label^="Unlock"]').first().click();
- }else{
-  await page.locator('#direction-buttons button').first().click();
-  await page.locator('#door-hotspots button[aria-label^="Unlock"]').first().click();
- }
+ await openQuestion();
  const prompt2=await page.locator('#question-title').innerText(),current=QUESTIONS.find(q=>q.prompt===prompt2),misses=current.choices.filter(c=>c!==current.answer);
  await page.getByRole('button',{name:misses[0],exact:false}).click();await page.getByRole('button',{name:misses[1],exact:false}).click();
  assert.match(await page.locator('#answer-feedback').innerText(),/The answer is/);assert.equal((await state()).score,earned);await page.locator('#question-next').click();assert.notEqual(await page.locator('#question-title').innerText(),prompt2);await page.locator('#leave-question').click();
@@ -67,7 +76,7 @@ try{
  const downloadPromise=page.waitForEvent('download');await page.locator('#export-save').click();const dl=await downloadPromise;await dl.saveAs(`${out}/journey.json`);const exported=JSON.parse(await readFile(`${out}/journey.json`,'utf8'));assert.ok(validSave(exported,QUESTIONS,CATEGORIES.map(c=>c.id)));await page.locator('[data-close="journal-dialog"]').click();
  checks.push('Journal includes discoveries; exported save validates');
  await page.setViewportSize({width:390,height:844});await page.screenshot({path:`${out}/mobile-castle.png`,fullPage:true});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
- await page.locator('#direction-buttons button').first().click();if(!(await page.locator('#question-dialog').isVisible()))await page.locator('#door-hotspots button[aria-label^="Unlock"]').first().click();
+ await openQuestion();
  await page.screenshot({path:`${out}/mobile-question.png`,fullPage:true});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  checks.push('390px mobile room and question have no horizontal overflow');
  // Render the real ending from a valid near-finish test save.
