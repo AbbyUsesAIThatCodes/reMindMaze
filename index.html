@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1d2923">
+  <meta name="description" content="A castle of questions. Explore a lantern-lit maze, meet its inhabitants, and find your way home through knowledge.">
+  <title>reMindMaze · The Lanternlight Castle</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="masthead">
+      <a class="brand" href="./" aria-label="reMindMaze home"><svg viewBox="0 0 40 48" aria-hidden="true"><path d="M16 7a4 4 0 0 1 8 0M9 18l11-9 11 9M12 18v22h16V18M8 42h24M9 18h22"/><path d="M20 23c-8 9-5 13 0 13s8-4 0-13Z" class="flame"/></svg><span><b><i>re</i>MindMaze</b><small>THE LANTERNLIGHT CASTLE</small></span></a>
+      <div class="journey-pill"><span class="little-star">✦</span><span id="journey-label">A castle of questions. A world to discover.</span></div>
+      <nav aria-label="Game menu"><button id="journal-button" class="quiet">Journal <kbd>J</kbd></button><button id="library-button" class="quiet">Library <kbd>L</kbd></button><button id="sound-button" class="icon-button" aria-label="Turn sound on" title="Turn sound on">♪<span id="sound-state">off</span></button><button id="menu-button" class="quiet">Menu</button></nav>
+    </header>
+    <main>
+      <div class="chapter-heading"><div><p class="eyebrow" id="floor-heading">FLOOR I · THE FORGOTTEN HALLS</p><h1 id="room-title">The Hall of Remembering</h1></div><div class="room-coordinates" id="room-coordinates">ROOM A10 <span>·</span> FACING NORTH</div></div>
+      <div class="game-layout">
+        <section class="adventure" aria-label="Castle exploration">
+          <div class="scene-frame" id="scene-frame">
+            <canvas id="room" width="1440" height="840" aria-label="A torchlit castle chamber with doorways and an inhabitant"></canvas>
+            <div class="scene-topline"><span id="scene-label">THE CURSE OF FORGETTING</span><span id="scene-weather">✧ &nbsp; After nightfall</span></div>
+            <div id="door-hotspots"></div>
+            <button id="painting-button" class="hotspot painting-hotspot" aria-label="Read the framed article" title="Read the framed article"><span>Read the atlas</span></button>
+            <button id="person-button" class="hotspot person-hotspot" aria-label="Talk to the inhabitant"><span id="person-hotspot-label">Speak to Mira</span></button>
+            <div class="scene-bottomline"><span id="scene-hint">Choose a doorway. Every answer opens a little more of the world.</span><span class="north-label">↑ N</span></div>
+          </div>
+          <div class="encounter">
+            <button id="portrait-button" class="portrait-button" aria-label="Talk to the inhabitant"><canvas id="portrait" width="140" height="164"></canvas></button>
+            <div class="dialogue"><p class="eyebrow"><span id="person-name">MIRA</span><span class="divider">/</span><span id="person-role">THE ARCHIVIST</span></p><p id="dialogue-text">Welcome, traveler. These doors have forgotten how to open. Remind them of something true, and they remember.</p><button class="text-button" id="talk-button">Talk again <span>↗</span></button></div>
+          </div>
+          <div class="navigation-strip"><span>Where next?</span><div id="direction-buttons" role="group" aria-label="Move through a door"></div><button id="stairs-button" class="gold-button" hidden>Ascend the stairs ↗</button></div>
+        </section>
+        <aside class="sidebar" aria-label="Journey status">
+          <section class="map-panel"><div class="panel-heading"><h2>Your bearings</h2><span id="map-floor">01</span></div><div class="map-wrap"><canvas id="map" width="280" height="280" aria-label="Castle floor map. Your location is a green marker; stairs are gold."></canvas><span class="map-north">N ↑</span></div><div class="map-legend"><span><i class="legend-you"></i>You</span><span><i class="legend-room"></i>Explored</span><span>▥ Stairs</span></div><div class="torch-row"><button id="torch-button" class="torch-button" title="Reveal the path for 12 seconds (T)">♧ &nbsp; Light a torch <kbd>T</kbd></button><span id="torch-count">5 / 5</span></div><p class="map-note" id="map-note">Five lights to guide your way.</p></section>
+          <section class="quest-panel"><p class="eyebrow">RESTORE THE CASTLE</p><div class="score-row"><strong id="score">0</strong><span id="score-goal">/ 20,000</span></div><div class="progress-track" role="progressbar" id="score-progress" aria-label="Progress toward restoring the castle" aria-valuemin="0" aria-valuemax="20000" aria-valuenow="0"><span id="score-fill"></span></div><p id="quest-text">Gather knowledge. Find the stairs. Break the spell.</p><div class="stat-pair"><div><b id="rooms-count">1</b><span>rooms explored</span></div><div><b id="answers-count">0</b><span>doors unlocked</span></div></div></section>
+          <button class="help-link" id="help-button">How to play & credits <span>?</span></button>
+        </aside>
+      </div>
+      <footer><span id="save-status">Your journey is saved on this device.</span><span>Inspired by a little CD-ROM magic. <b>Powered by curiosity.</b></span><span>v0.1.0 · Lanternlight</span></footer>
+    </main>
+  </div>
+  <dialog id="welcome-dialog" class="parchment welcome-dialog" aria-labelledby="welcome-title">
+    <button class="close-button" id="close-welcome" aria-label="Return to the castle" hidden>×</button>
+    <div class="welcome-mark">✧</div><p class="eyebrow">WELCOME TO REMINDMAZE</p><h2 id="welcome-title">Some doors open<br>with a little knowledge.</h2><p class="welcome-story">Beyond a forgotten book lies a castle that has lost its memories. Walk its winding halls, meet its curious residents, and answer your way back into the light.</p>
+    <button id="continue-button" class="gold-button continue-button" hidden>Continue your journey →</button>
+    <form id="start-form">
+      <div class="form-row"><label>Your traveler’s name<input name="name" id="traveler-name" maxlength="24" placeholder="Traveler" autocomplete="given-name"></label><label>Question difficulty<select name="difficulty"><option value="1">I · Wanderer</option><option value="2" selected>II · Apprentice</option><option value="3">III · Scholar</option><option value="4">IV · Sage</option></select></label></div>
+      <div class="form-row"><label>Journey length<select name="goal"><option value="20000">Classic quest · 20,000 points</option><option value="5000">Short adventure · 5,000 points</option></select></label><label>Your pace<select name="mode"><option value="classic">Classic · speed bonus</option><option value="study">Study · no timer</option></select></label></div>
+      <fieldset><legend>What sparks your curiosity? <button id="select-all" class="text-button" type="button">Select all</button></legend><div id="category-options" class="category-options"></div></fieldset>
+      <p class="form-note">Includes questions up to your chosen difficulty. Research is always welcome.</p><button class="gold-button start-button" type="submit" id="start-button">Enter the castle <span>→</span></button>
+    </form>
+    <p class="welcome-foot">108 sourced questions · 9 subjects · a different maze every journey</p>
+  </dialog>
+  <dialog id="question-dialog" class="parchment question-dialog" aria-labelledby="question-title">
+    <div class="question-top"><span id="question-category" class="eyebrow">HISTORY</span><span id="question-tier">I · Wanderer</span><button id="leave-question" class="close-button" aria-label="Leave this question">×</button></div>
+    <p class="question-context" id="question-context">A question guards the north door.</p><h2 id="question-title"></h2>
+    <div class="question-meter"><span id="points-available">350 points available</span><div class="bonus-track"><span id="bonus-fill"></span></div><span id="timer-label">Speed bonus</span></div>
+    <div id="answers" class="answers"></div><div id="answer-feedback" class="answer-feedback" aria-live="polite"></div>
+    <div class="question-actions"><button id="research-question" class="text-button">▤ &nbsp; Look it up in Wikipedia <span>↗</span></button><button id="question-next" class="gold-button" hidden>Open the door →</button></div>
+    <p class="question-foot" id="question-foot">Two attempts. No loss of accumulated points. Keys 1–4 choose an answer.</p>
+  </dialog>
+  <dialog id="reader-dialog" class="parchment reader-dialog" aria-labelledby="reader-title">
+    <button class="close-button" data-close="reader-dialog" aria-label="Close the library">×</button><p class="eyebrow">THE WIKIPEDIA READING ROOM</p><h2 id="reader-title">Follow your curiosity.</h2>
+    <form id="search-form" class="search-form"><label class="sr-only" for="article-search">Search Wikipedia</label><input id="article-search" placeholder="A person, a place, an idea…" autocomplete="off" maxlength="160"><button class="gold-button" type="submit">Search</button></form>
+    <div id="reader-content" aria-live="polite"></div><div id="reader-links" class="reader-links"></div><p class="license-note">Article extracts by Wikipedia contributors · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Summaries may be shortened. Follow the article’s references to explore its evidence.</p>
+  </dialog>
+  <dialog id="journal-dialog" class="parchment journal-dialog" aria-labelledby="journal-title"><button class="close-button" data-close="journal-dialog" aria-label="Close your journal">×</button><p class="eyebrow">NOTES FROM THE JOURNEY</p><h2 id="journal-title">Your book of discoveries.</h2><p id="journal-summary"></p><div id="journal-entries"></div><button id="export-save" class="text-button">↓ Export journey</button><label class="text-button import-label">↑ Import journey<input id="import-save" type="file" accept="application/json,.json"></label><p id="import-status" aria-live="polite"></p></dialog>
+  <dialog id="help-dialog" class="parchment help-dialog" aria-labelledby="help-title"><button class="close-button" data-close="help-dialog" aria-label="Close help">×</button><p class="eyebrow">A SMALL GUIDE FOR A LARGE CASTLE</p><h2 id="help-title">Let curiosity lead.</h2><ol><li><b>Explore the rooms.</b> Click a doorway or use the arrow keys / WASD. The view always faces north; south is behind you.</li><li><b>Answer to unlock a door.</b> You get two attempts. A second miss reveals an explanation, then offers a fresh question. Open doors stay open.</li><li><b>Find the stairs.</b> The gold stair symbol is always visible on your map. Torches reveal a route for 12 seconds. You have five for the whole journey.</li><li><b>Restore the castle.</b> Reach your point goal, then use the stairs on your current floor. Before reaching the goal, stairs lead to a new floor.</li></ol><h3>Take the scenic route</h3><p>Click the inhabitant to talk, or the framed atlas to read. Wikipedia research is encouraged: looking up a question removes its speed bonus, but the door and base points are still yours to earn. Study mode has no speed bonus or countdown.</p><p>Base points: 150 / 250 / 400 / 600 by question tier. Classic adds up to 200 speed points, decreasing by four each second. A first wrong attempt reduces the possible award by 50. Your existing score is never reduced.</p><p><kbd>1–4</kbd> answer · <kbd>T</kbd> torch · <kbd>J</kbd> journal · <kbd>L</kbd> library · <kbd>Esc</kbd> close a panel. Menus pause the active timer. Sound is optional and starts muted.</p><h3>About this little castle</h3><p>reMindMaze is an independent tribute to Encarta MindMaze, with original code, procedural artwork, characters, and dialogue. It contains no Encarta assets and is not affiliated with Microsoft or the Wikimedia Foundation.</p><p>The starter pack contains 108 original questions informed by 27 Wikipedia articles. Source links and explanations accompany every question. The pack is curated; live Wikipedia pages are for reading, not automatically generated questions. Questions repeat after the selected pool is exhausted.</p><p>Code and original artwork: MIT. Question pack and adapted factual explanations: CC BY-SA 4.0; attribution to the linked Wikipedia contributors. See the repository’s CREDITS.md for details.</p></dialog>
+  <dialog id="win-dialog" class="parchment win-dialog" aria-labelledby="win-title"><div class="welcome-mark">✦</div><p class="eyebrow">THE CASTLE REMEMBERS</p><h2 id="win-title">You brought back the light.</h2><p>The last door opens. Names return to portraits. Music spills into the halls. Somewhere in the garden, a very relieved beekeeper cheers.</p><blockquote>“You did not arrive knowing everything,” Mira says. “You kept asking. That was enough.”</blockquote><p id="win-stats"></p><button id="win-journal" class="quiet">Read your discoveries</button><button id="new-journey" class="gold-button">Another adventure →</button></dialog>
+  <div id="toast" role="status"></div>
+  <noscript><p class="noscript">reMindMaze needs JavaScript to run. Enable it in your browser, then reload.</p></noscript>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
