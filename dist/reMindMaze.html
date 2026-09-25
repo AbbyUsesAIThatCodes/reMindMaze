@@ -836,7 +836,7 @@ $('question-dialog').addEventListener('cancel',event=>{event.preventDefault();le
 $('question-next').onclick=()=>{
   const p=state.pending;if(!p)return;
   if(p.status==='correct'){enter(state,p.to);dialogueIndex=0;refreshRoute();sound.door();closeDialog('question-dialog');save();render();}
-  else if(p.status==='failed'){const to=p.to;state.pending=null;beginDoor(state,to,QUESTIONS);save();renderQuestion();$('answers button').focus();}
+  else if(p.status==='failed'){const to=p.to;state.pending=null;beginDoor(state,to,QUESTIONS);save();renderQuestion();$('answers').querySelector('button').focus();}
 };
 function talk(){dialogueIndex++;$('dialogue-text').textContent=inhabitantFor(state).lines[dialogueIndex%3];}
 for(const id of ['talk-button','person-button','portrait-button'])$(id).onclick=talk;

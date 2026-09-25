@@ -7,6 +7,8 @@ reMindMaze brings the exploratory quiz-adventure loop of Encarta MindMaze to a m
 **Version 0.1.0 — Lanternlight** is a complete first playable journey: start, explore, answer, research, save, climb, and reach the ending. It is an independent tribute, not a byte-for-byte reconstruction of Encarta 98.
 
 
+![The Lanternlight Castle](docs/screenshots/castle.png)
+
 ## Play locally
 
 **Easiest:** download `dist/reMindMaze.html` and double-click it. This portable edition contains the complete game in one file; no installation or local server is needed. Wikipedia reading requires internet, but the castle and question pack work offline.

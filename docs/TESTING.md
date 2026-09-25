@@ -31,6 +31,8 @@ Do not have another server listening on port 4173 when starting this test. The t
 
 The browser suite covers setup, desktop rendering, pending-question reload, scoring and backtracking, failed challenges, torches, journal export, mobile overflow, ending presentation, and the portable file. Wikipedia success and failure are tested with deterministic HTTP fixtures; they do not prove that Wikipedia is reachable on any particular user network.
 
-## Current local environment limitation
+## Browser environment
 
-The authoring workspace could run the Node suite but could not install a local Chromium binary. The available cloud browser rejected localhost and local file URLs. Browser execution therefore belongs to the repository workflow; check its actual status before treating the browser suite as passed. No visual or live Wikipedia success is implied by the logic tests.
+The authoring workspace runs the Node suite. Chromium interaction checks run in GitHub Actions, where their screenshots are retained as artifacts. The first run exercised the full suite and caught a keyboard-focus selector error after retrying a failed challenge; the implementation was corrected before release. Check the latest workflow status for the current commit.
+
+Wikipedia API success and outage behaviors use fixtures in the browser suite. Live Wikipedia availability was not independently verified from the authoring environment.
