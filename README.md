@@ -1,3 +1,9 @@
+# Play Online
+
+**[Play reMindMaze Online](https://abbyusesaithatcodes.github.io/reMindMaze/)**
+
+The October 9 release reuses the existing 0.1.0 Lanternlight portable edition without compilation. See [Pages Release](deployment/RELEASE.md). Earlier setup instructions below are historical.
+
 # reMindMaze
 
 **A castle of questions. A world to discover.**

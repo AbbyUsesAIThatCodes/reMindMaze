@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "repo": "reMindMaze",
+  "buildId": "0.1.0 Lanternlight (Preserved Portable Edition)",
+  "runtimeRevision": "0c3b33d391a4e674c94e4d372306595c17e0448e",
+  "legacyIdentity": true,
+  "identityLimit": "The pre-existing portable artifact does not include an immutable build-time UTC/ordinal/source manifest. Its original visible version is preserved; this release does not invent missing historical identity.",
+  "files": [
+    {
+      "path": "CREDITS.md",
+      "bytes": 4170,
+      "sha256": "ccdff94a660f03585b4d6297bcdd3b9bd8b1678411f013b24f5b7ef0f93279b8"
+    },
+    {
+      "path": "index.html",
+      "bytes": 102954,
+      "sha256": "bdd87a93e4a1ca6d117f777e67f806ab5770b0e6985617d50d05eba0c8b84196"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1236,
+      "sha256": "335d5c1dae0e7a34b486f1c0220154e9207dcc26a6575eefe365a88ee1e8e860"
+    }
+  ]
+}
