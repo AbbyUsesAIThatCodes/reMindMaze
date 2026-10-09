@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "checkedAt": "2026-10-09T01:16:19.735535+00:00",
+  "buildId": "0.1.0 Lanternlight (Preserved Portable Edition)",
+  "runtimeRevision": "0c3b33d391a4e674c94e4d372306595c17e0448e",
+  "artifactReused": true,
+  "environment": "Abigail; installed Edge; isolated temporary profiles; software WebGL where applicable",
+  "checks": {
+    "modelTests": 11,
+    "browserAndPortableChecks": 11,
+    "evidence": [
+      {
+        "file": "reMindMaze-browser.txt",
+        "sha256": "37442917bc549726578be648caafb449b9f719b92a5740e79c7e565cedc6182b"
+      }
+    ],
+    "notes": "Existing modular source and unchanged portable artifact checked using installed Edge. Legacy portable identity limitation is recorded in payload.json and BUILD_IDENTITY.md; no missing historical fields invented."
+  },
+  "limits": [
+    "No managed school-device or physical apparatus acceptance claimed.",
+    "Source/artifact identities are preserved; publication commit is separate provenance."
+  ]
+}

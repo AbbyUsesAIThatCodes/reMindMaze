@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1d2923">
+  <meta name="description" content="A castle of questions. Explore a lantern-lit maze, meet its inhabitants, and find your way home through knowledge.">
+  <title>reMindMaze · The Lanternlight Castle</title>
+
+  <style>
+:root{color-scheme:dark;--ink:#202d25;--deep:#131e19;--gold:#d2b378;--light:#e1d8ba;--muted:#a4ae9c;--line:#51604466;--paper:#e9ddba;--paper-ink:#30392e;--serif:Georgia,'Times New Roman',serif;--sans:'Segoe UI',system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 0,#354535 0,#1c2a22 45%,#131e19 100%);color:var(--light);font-family:var(--sans);font-size:14px;min-height:100vh}button,input,select{font:inherit}button,a,input,select{touch-action:manipulation}button{cursor:pointer}button:disabled{cursor:default;opacity:.45}a{color:inherit}button{color:inherit;border:0;background:transparent}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #e5bb68;outline-offset:4px}button:hover:not(:disabled){filter:brightness(1.12)}h1,h2,h3,p{margin:0}h1,h2,h3{font-family:var(--serif);font-weight:400}kbd{font:10px var(--sans);padding:1px 4px;border:1px solid currentColor;border-radius:3px;opacity:.65}svg{display:block}button[hidden],[hidden]{display:none!important}.app{max-width:1600px;margin:auto;padding:0 40px}.masthead{display:flex;align-items:center;justify-content:space-between;gap:20px;height:103px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;text-decoration:none;gap:11px;min-width:235px}.brand svg{width:34px;height:48px;fill:none;stroke:var(--gold);stroke-width:1.5}.brand .flame{fill:var(--gold);stroke:none}.brand b{font:30px var(--serif);letter-spacing:-1px}.brand b i{font-style:normal;color:var(--gold)}.brand small{display:block;font-size:8px;letter-spacing:2.4px;margin-top:6px;color:#b4b49b}.journey-pill{font:italic 14px var(--serif);color:#aaa992;display:flex;align-items:center;gap:12px}.little-star{color:var(--gold);font-size:16px;font-style:normal}nav{display:flex;align-items:center;gap:15px}.quiet{padding:9px 0;font-size:12px;white-space:nowrap}.quiet kbd{margin-left:5px}.icon-button{display:flex;align-items:center;gap:4px;border:1px solid var(--line);width:49px;height:34px;justify-content:center;font-size:19px;border-radius:3px}.icon-button span{font:9px var(--sans);color:var(--muted)}main{padding-top:29px}.chapter-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:22px}.eyebrow{font-size:10px;letter-spacing:2px;font-weight:600;color:var(--gold)}h1{font-size:32px;margin-top:8px;letter-spacing:.1px}.room-coordinates{font-size:9px;letter-spacing:1.5px;color:#a7b09b;padding-bottom:5px}.room-coordinates span{margin:0 9px}.game-layout{display:grid;grid-template-columns:minmax(0,1fr) 286px;gap:26px;align-items:start}.scene-frame{position:relative;border:1px solid #9e91614a;box-shadow:0 8px 32px #00000050,0 0 0 4px #101b1570;border-radius:3px;overflow:hidden;background:#202921}.scene-frame>canvas{display:block;width:100%;aspect-ratio:12/7}.scene-topline,.scene-bottomline{position:absolute;left:0;right:0;display:flex;justify-content:space-between;gap:10px;align-items:center;pointer-events:none}.scene-topline{top:0;background:linear-gradient(#0b120dcc,transparent);padding:19px 22px 35px;font-size:8px;letter-spacing:2px;color:#c3c0a2}.scene-weather{font-family:var(--serif)}.scene-bottomline{bottom:0;background:linear-gradient(transparent,#07100be6);padding:32px 22px 17px;font:italic 12px var(--serif);color:#d1c9a9}.north-label{font-style:normal;letter-spacing:3px}.hotspot{position:absolute;z-index:1;display:flex;align-items:end;justify-content:center;transition:background .2s}.hotspot span{font-size:10px;letter-spacing:.3px;white-space:nowrap;background:#18271fe6;color:#e2d4ab;border:1px solid #b69a5973;padding:7px 11px;border-radius:2px;box-shadow:0 3px 10px #0005}.hotspot:hover,.hotspot:focus-visible{background:#e6ca7b0a}.door-n{left:43%;top:27%;width:14%;height:40%;padding-bottom:5px}.door-w{left:5%;top:32%;width:13%;height:45%;padding-bottom:8px}.door-e{left:82%;top:32%;width:13%;height:45%;padding-bottom:8px}.door-s{left:42%;bottom:8%;width:16%;height:9%}.door-s span{background:#19281de6}.painting-hotspot{left:28%;top:29%;width:10%;height:24%}.painting-hotspot span{opacity:0;position:absolute;bottom:-12px}.person-hotspot{left:63%;top:47%;width:12%;height:33%}.person-hotspot span{opacity:0;position:absolute;bottom:0}.hotspot:hover span,.hotspot:focus-visible span{opacity:1}.encounter{display:flex;margin-top:18px;min-height:130px;background:linear-gradient(110deg,#e3d5ac,#d6c9a2);border:1px solid #bdad7e;color:#323a2d;box-shadow:0 5px 15px #0002;border-radius:2px;overflow:hidden}.portrait-button{align-self:stretch;width:110px;flex-shrink:0;overflow:hidden;padding:0;border-right:1px solid #9e9269;display:flex;align-items:center;justify-content:center;background:#3e4735}.portrait-button canvas{width:110px;height:129px;object-fit:cover}.dialogue{padding:18px 23px 12px}.dialogue .eyebrow{color:#596340;font-size:9px;letter-spacing:1.5px}.divider{margin:0 10px;color:#a29260}.dialogue>p:nth-child(2){font:17px/1.55 var(--serif);margin-top:8px;min-height:52px}.text-button{font-size:11px;font-weight:600;color:#546346;padding:8px 0;display:inline-block;text-align:left}.text-button span{margin-left:10px}.talk-button{padding-bottom:0}.navigation-strip{display:flex;align-items:center;gap:12px;padding:17px 0 0;min-height:54px}.navigation-strip>span{font:italic 13px var(--serif);color:#a7ae9a;margin-right:6px}#direction-buttons{display:flex;gap:7px}.direction-button{border:1px solid #82906a4d;padding:7px 13px;border-radius:2px;font-size:10px;letter-spacing:.3px;min-width:64px}.direction-button.open{border-color:#87aa835c;color:#bdcdac}.navigation-strip .gold-button{margin-left:auto;font-size:11px;padding:9px 12px}.sidebar{display:flex;flex-direction:column;gap:19px}.map-panel{border:1px solid #9b947051;background:#334032a8;padding:17px 17px 13px;border-radius:3px;box-shadow:0 4px 14px #0002}.panel-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.panel-heading h2{font-size:19px}.panel-heading>span{font:18px var(--serif);color:#9eaa8e}.map-wrap{padding:10px;background:#d5c99f;box-shadow:inset 0 0 24px #6d553925;position:relative;border:1px solid #b5a677;transform:rotate(-.4deg)}.map-wrap canvas{display:block;width:100%;height:auto;border:1px solid #817859}.map-north{position:absolute;right:11px;top:-22px;font-size:8px;color:#b4ba9f}.map-legend{display:flex;align-items:center;justify-content:space-between;margin:12px 2px 18px;font-size:9px;color:#c3c6ab}.map-legend span{display:flex;align-items:center;gap:4px}.map-legend i{display:inline-block;width:7px;height:7px}.legend-you{border-radius:50%;background:#98b99d}.legend-room{background:#e1d2a6}.torch-row{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #a2ac7e33;padding-top:12px}.torch-button{color:var(--gold);font-size:12px;padding:4px 0}.torch-button kbd{margin-left:7px}.torch-row>span{font:13px var(--serif);color:#d3c397}.map-note{font:italic 11px var(--serif);color:#a9af98;margin-top:8px;min-height:14px}.quest-panel{padding:4px 4px 0}.quest-panel .eyebrow{font-size:9px;letter-spacing:1.4px}.score-row{display:flex;align-items:baseline;gap:8px;margin:8px 0 12px}.score-row strong{font:32px var(--serif);color:#e4d4a7}.score-row>span{font-size:11px;color:#a4ad98}.progress-track{height:4px;background:#58604470;border-radius:3px;overflow:hidden}.progress-track>span{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}.quest-panel>p:not(.eyebrow){font:italic 12px/1.6 var(--serif);margin:12px 0 18px;color:#a6b19b}.stat-pair{display:flex;border-top:1px solid var(--line);padding-top:13px}.stat-pair>div{flex:1}.stat-pair>div+div{padding-left:20px;border-left:1px solid var(--line)}.stat-pair b{font:23px var(--serif);display:block;color:#c9d0b4}.stat-pair span{font-size:9px;display:block;margin-top:5px;color:#a8b298}.help-link{display:flex;justify-content:space-between;align-items:center;padding:0 4px;font-size:10px;color:#a8b298}.help-link span{border:1px solid #6b7a5688;border-radius:50%;width:17px;height:17px;line-height:15px;font-family:var(--serif)}footer{display:flex;justify-content:space-between;gap:15px;padding:26px 0 20px;margin-top:20px;border-top:1px solid var(--line);color:#7e907b;font-size:9px}footer b{font-weight:400;color:#a2ac91}dialog{max-height:90vh;max-height:90dvh;overflow:auto}dialog::backdrop{background:#070e0bc9;backdrop-filter:blur(5px)}.parchment{color-scheme:light;border:1px solid #baa775;border-radius:4px;box-shadow:0 25px 100px #0009,0 0 0 7px #b49d6226;padding:34px 38px;color:var(--paper-ink);background:radial-gradient(ellipse at 50% 0,#f3e8c8,#e5d6af 90%);width:min(650px,calc(100% - 32px))}.parchment:focus-visible{outline:none}.parchment .eyebrow{color:#697247;letter-spacing:2px;font-size:9px}.parchment h2{font-size:32px;line-height:1.2;margin-top:10px}.parchment h3{font-size:22px;margin:25px 0 10px}.close-button{position:absolute;top:13px;right:16px;font:27px var(--serif);color:#6d7452;padding:1px 7px}.welcome-dialog{text-align:center;width:min(640px,calc(100% - 32px));padding-top:24px}.welcome-mark{font-size:40px;color:#8b733e;margin:0 0 8px}.welcome-dialog h2{font-size:36px}.welcome-story{font:15px/1.6 var(--serif);color:#5e654b;max-width:475px;margin:17px auto 24px}form label{display:flex;flex-direction:column;text-align:left;font-size:10px;font-weight:600;gap:7px;color:#535e43}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:15px}input,select{background:#fffae84d;border:1px solid #a39f7790;border-radius:2px;padding:11px 12px;color:#303d2c;font-size:12px;min-width:0}fieldset{border:0;border-top:1px solid #a4a07870;padding:15px 0 0;margin:20px 0 0;text-align:left}legend{padding:0 8px 0 0;font-size:10px;color:#5f6848;width:auto}legend .text-button{padding:0 0 0 14px;font-size:9px}.category-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.category-options label{flex-direction:row;align-items:center;border:1px solid #a49c7166;border-radius:2px;padding:9px 7px;gap:6px;font-size:10px;cursor:pointer}.category-options label:has(input:checked){border-color:#7280578a;background:#9aa67b20}.category-options input{appearance:auto;width:12px;height:12px;margin:0;accent-color:#536c4f}.category-options label span{font-size:13px}.form-note{font:italic 11px var(--serif);color:#767650;margin:16px 0}.gold-button{background:linear-gradient(#d4b575,#bc995b);border:1px solid #a28349;color:#293825;padding:11px 21px;border-radius:2px;font-size:12px;font-weight:600;box-shadow:inset 0 1px #ead3a2;white-space:nowrap}.start-button{display:flex;justify-content:center;gap:25px;width:100%;font-size:13px;padding:14px}.continue-button{width:100%;margin-bottom:25px;background:linear-gradient(#547353,#38583e);color:#eee3bf;border-color:#344d35;box-shadow:inset 0 1px #819573}.welcome-foot{font-size:9px;color:#7f805c;margin:16px 0 0}.question-dialog{width:min(730px,calc(100% - 32px));padding-top:29px}.question-top{display:flex;justify-content:space-between;margin-right:25px;font-size:10px;color:#777953}.question-context{font:italic 13px var(--serif);color:#747958;margin-top:25px}.question-dialog h2{font-size:29px;line-height:1.4;margin:10px 0 22px}.question-meter{display:flex;align-items:center;gap:15px;font-size:10px;color:#6b7250;margin-bottom:24px}.bonus-track{height:3px;flex:1;background:#c5bd9680}.bonus-track span{display:block;background:#738556;height:100%;width:100%}.answers{display:grid;grid-template-columns:1fr 1fr;gap:11px}.answer-button{display:flex;align-items:center;gap:12px;text-align:left;background:#f4e9c64d;border:1px solid #aaa37a88;padding:14px 14px;color:#39452f;min-height:62px;border-radius:3px;font:17px/1.3 var(--serif)}.answer-button:hover:not(:disabled){background:#fff2cc;border-color:#65784f}.answer-button kbd{font:11px var(--sans);width:24px;height:24px;text-align:center;line-height:20px;flex-shrink:0;color:#747c56;opacity:1;border-color:#a6aa8366}.answer-button.wrong{background:#ad665b15;border-color:#a5726280;text-decoration:line-through;opacity:.7}.answer-button.correct{background:#627e4124;border-color:#5e7e47;opacity:1}.answer-feedback{font:15px/1.6 var(--serif);min-height:36px;margin-top:15px;color:#50623b}.answer-feedback.error{color:#855841}.question-actions{display:flex;justify-content:space-between;gap:16px;align-items:center;border-top:1px solid #b1a67b77;margin-top:16px;padding-top:15px}.question-actions .text-button{font-size:11px}.question-foot{font-size:9px;line-height:1.6;color:#797955;margin-top:17px}.reader-dialog{width:min(730px,calc(100% - 32px))}.search-form{display:flex;gap:8px;margin:23px 0}.search-form input{flex:1}#reader-content{font:16px/1.75 var(--serif);white-space:pre-line}#reader-content h3{margin-top:10px}#reader-content .reader-status{font:11px/1.5 var(--sans);color:#737a52;margin-bottom:15px}.reader-results{display:flex;flex-direction:column;gap:8px;margin:15px 0}.reader-results button{text-align:left;font:18px var(--serif);border-bottom:1px solid #aaa37a55;padding:10px 0;color:#415d3b}.reader-links{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0;font-size:11px;color:#53643f}.license-note{font:10px/1.6 var(--sans);color:#747852;padding-top:16px;border-top:1px solid #b1a67b77}.journal-dialog{width:min(770px,calc(100% - 32px))}#journal-summary{margin:16px 0;font:14px var(--serif);color:#6a7353}#journal-entries{margin-bottom:20px;max-height:50vh;overflow:auto}.journal-entry{padding:17px 0;border-top:1px solid #b1a67b77}.journal-entry>p:first-child{font-size:9px;color:#6d754e;letter-spacing:.6px;margin-bottom:8px}.journal-entry h3{font-size:19px;line-height:1.5;margin:0}.journal-entry>p{font:14px/1.7 var(--serif);margin:6px 0}.journal-entry button{padding:3px 0}.import-label{position:relative;cursor:pointer;margin-left:24px}.import-label input{position:absolute;opacity:0;width:100%;height:100%;inset:0;cursor:pointer}#import-status{font-size:12px;color:#6c7151}.help-dialog p,.help-dialog li{font:15px/1.7 var(--serif);margin:13px 0}.help-dialog ol{padding-left:19px}.help-dialog li{padding-left:6px}.win-dialog{text-align:center}.win-dialog>p:not(.eyebrow){font:17px/1.8 var(--serif);margin:20px 0}.win-dialog blockquote{font:italic 21px/1.5 var(--serif);margin:20px 0;color:#657147}.win-dialog .quiet{margin-right:24px;color:#566543}#toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);background:#e6d7ad;color:#34452f;border:1px solid #af9b66;padding:12px 24px;border-radius:3px;box-shadow:0 5px 30px #0006;z-index:10;pointer-events:none;opacity:0;transition:.2s;font-size:12px;max-width:90vw;text-align:center}#toast.visible{opacity:1;transform:translate(-50%,0)}.sr-only{position:absolute;width:1px;height:1px;margin:-1px;clip:rect(0,0,0,0);overflow:hidden}.noscript{position:fixed;top:20%;left:10%;right:10%;padding:30px;background:#e8d7a9;color:#222}
+@media(min-width:1450px){.app{padding:0 55px}.game-layout{grid-template-columns:minmax(0,1fr) 310px;gap:32px}.map-panel{padding:20px}.dialogue>p:nth-child(2){font-size:18px}.map-legend{font-size:10px}}
+@media(max-width:1100px){.app{padding:0 25px}.journey-pill{display:none}.game-layout{grid-template-columns:minmax(0,1fr) 244px;gap:20px}.scene-topline{font-size:7px}.scene-bottomline{font-size:10px}.map-panel{padding:13px}.dialogue{padding:13px 16px}.dialogue>p:nth-child(2){font-size:15px}.portrait-button,.portrait-button canvas{width:95px}.navigation-strip{flex-wrap:wrap}.navigation-strip .gold-button{margin-left:0}.hotspot span{font-size:9px;padding:6px}.room-coordinates{font-size:8px}footer>span:nth-child(2){display:none}}
+@media(max-width:800px){.app{padding:0 16px}.masthead{height:82px;gap:8px}.brand{min-width:0;gap:6px}.brand b{font-size:25px}.brand small{font-size:6px;letter-spacing:1.9px}.brand svg{width:25px}.masthead nav{gap:13px}.quiet{font-size:11px}.quiet kbd{display:none}.icon-button{width:35px;font-size:16px}.icon-button span{font-size:8px}.game-layout{grid-template-columns:minmax(0,1fr)}main{padding-top:22px}.chapter-heading{margin-bottom:18px}h1{font-size:28px}.room-coordinates{max-width:90px;line-height:1.6;text-align:right}.sidebar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.map-panel{grid-row:span 2}.help-link{align-self:end;margin-bottom:5px}.quest-panel{padding:9px 3px}.map-wrap{max-width:260px;margin:0 auto}.map-note{font-size:10px;line-height:1.5}.map-legend{font-size:8px}.torch-button{font-size:10px}.torch-button kbd{display:none}.torch-row>span{font-size:11px}.panel-heading h2{font-size:17px}.scene-bottomline{padding:23px 15px 10px;font-size:11px}footer{margin-top:20px;padding:18px 0;font-size:8px}.parchment{padding:28px 24px}.welcome-dialog h2{font-size:31px}.welcome-story{font-size:14px;margin:15px 0 20px}.category-options{gap:6px}.category-options label{font-size:9px;padding:8px 5px}.question-dialog h2{font-size:25px}.answer-button{font-size:16px}.question-actions{flex-wrap:wrap}.question-actions .gold-button{margin-left:auto}.scene-frame>canvas{aspect-ratio:12/7}.dialogue>p:nth-child(2){min-height:0}.dialogue .eyebrow{font-size:8px}.encounter{min-height:120px}.stat-pair>div+div{padding-left:12px}.stat-pair span{font-size:8px}.navigation-strip>span{font-size:12px}.navigation-strip{gap:8px}.direction-button{min-width:0;padding:8px 11px}.navigation-strip .gold-button{font-size:10px}}
+@media(max-width:430px){.app{padding:0 10px}.masthead nav{gap:9px}.brand b{font-size:23px}.brand small{font-size:5.5px}.brand svg{width:22px}.quiet{font-size:10px}.icon-button{width:31px}.chapter-heading .eyebrow{font-size:8px}.chapter-heading h1{font-size:24px}.scene-topline{padding:12px 12px 23px}.scene-topline>span:last-child{display:none}.scene-bottomline{font-size:9px}.hotspot span{font-size:8px;padding:5px}.encounter{margin-top:13px}.portrait-button,.portrait-button canvas{width:77px}.portrait-button canvas{height:115px;object-fit:cover}.dialogue{padding:12px}.dialogue>p:nth-child(2){font-size:14px}.divider{margin:0 5px}.navigation-strip>span{display:none}#direction-buttons{gap:5px}.direction-button{font-size:9px;padding:8px 10px}.sidebar{gap:12px}.map-panel{padding:10px}.map-legend{gap:4px;font-size:7px}.map-note{font-size:9px}.map-wrap{padding:6px}.quest-panel .eyebrow{font-size:8px}.score-row strong{font-size:28px}.score-row{gap:5px}.score-row>span{font-size:9px}.quest-panel>p:not(.eyebrow){font-size:11px}.torch-row{gap:3px}.torch-button{font-size:9px}.panel-heading h2{font-size:15px}.parchment{padding:26px 19px}.form-row{gap:10px}.form-row label{font-size:9px}input,select{font-size:11px;padding:10px 8px}.category-options label{font-size:8px}.welcome-dialog h2{font-size:28px}.welcome-mark{font-size:30px}.answers{grid-template-columns:1fr;gap:8px}.answer-button{min-height:48px;padding:10px 12px;font-size:16px}.question-dialog h2{font-size:24px;margin-bottom:15px}.question-meter{gap:7px;font-size:9px;margin-bottom:15px}.question-context{margin-top:20px}.reader-dialog .search-form button{padding:10px}.parchment h2{font-size:27px}.welcome-foot{font-size:8px}.scene-hint{max-width:90%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+
+</style>
+</head>
+<body>
+  <div class="app">
+    <header class="masthead">
+      <a class="brand" href="./" aria-label="reMindMaze home"><svg viewBox="0 0 40 48" aria-hidden="true"><path d="M16 7a4 4 0 0 1 8 0M9 18l11-9 11 9M12 18v22h16V18M8 42h24M9 18h22"/><path d="M20 23c-8 9-5 13 0 13s8-4 0-13Z" class="flame"/></svg><span><b><i>re</i>MindMaze</b><small>THE LANTERNLIGHT CASTLE</small></span></a>
+      <div class="journey-pill"><span class="little-star">✦</span><span id="journey-label">A castle of questions. A world to discover.</span></div>
+      <nav aria-label="Game menu"><button id="journal-button" class="quiet">Journal <kbd>J</kbd></button><button id="library-button" class="quiet">Library <kbd>L</kbd></button><button id="sound-button" class="icon-button" aria-label="Turn sound on" title="Turn sound on">♪<span id="sound-state">off</span></button><button id="menu-button" class="quiet">Menu</button></nav>
+    </header>
+    <main>
+      <div class="chapter-heading"><div><p class="eyebrow" id="floor-heading">FLOOR I · THE FORGOTTEN HALLS</p><h1 id="room-title">The Hall of Remembering</h1></div><div class="room-coordinates" id="room-coordinates">ROOM A10 <span>·</span> FACING NORTH</div></div>
+      <div class="game-layout">
+        <section class="adventure" aria-label="Castle exploration">
+          <div class="scene-frame" id="scene-frame">
+            <canvas id="room" width="1440" height="840" aria-label="A torchlit castle chamber with doorways and an inhabitant"></canvas>
+            <div class="scene-topline"><span id="scene-label">THE CURSE OF FORGETTING</span><span id="scene-weather">✧ &nbsp; After nightfall</span></div>
+            <div id="door-hotspots"></div>
+            <button id="painting-button" class="hotspot painting-hotspot" aria-label="Read the framed article" title="Read the framed article"><span>Read the atlas</span></button>
+            <button id="person-button" class="hotspot person-hotspot" aria-label="Talk to the inhabitant"><span id="person-hotspot-label">Speak to Mira</span></button>
+            <div class="scene-bottomline"><span id="scene-hint">Choose a doorway. Every answer opens a little more of the world.</span><span class="north-label">↑ N</span></div>
+          </div>
+          <div class="encounter">
+            <button id="portrait-button" class="portrait-button" aria-label="Talk to the inhabitant"><canvas id="portrait" width="140" height="164"></canvas></button>
+            <div class="dialogue"><p class="eyebrow"><span id="person-name">MIRA</span><span class="divider">/</span><span id="person-role">THE ARCHIVIST</span></p><p id="dialogue-text">Welcome, traveler. These doors have forgotten how to open. Remind them of something true, and they remember.</p><button class="text-button" id="talk-button">Talk again <span>↗</span></button></div>
+          </div>
+          <div class="navigation-strip"><span>Where next?</span><div id="direction-buttons" role="group" aria-label="Move through a door"></div><button id="stairs-button" class="gold-button" hidden>Ascend the stairs ↗</button></div>
+        </section>
+        <aside class="sidebar" aria-label="Journey status">
+          <section class="map-panel"><div class="panel-heading"><h2>Your bearings</h2><span id="map-floor">01</span></div><div class="map-wrap"><canvas id="map" width="280" height="280" aria-label="Castle floor map. Your location is a green marker; stairs are gold."></canvas><span class="map-north">N ↑</span></div><div class="map-legend"><span><i class="legend-you"></i>You</span><span><i class="legend-room"></i>Explored</span><span>▥ Stairs</span></div><div class="torch-row"><button id="torch-button" class="torch-button" title="Reveal the path for 12 seconds (T)">♧ &nbsp; Light a torch <kbd>T</kbd></button><span id="torch-count">5 / 5</span></div><p class="map-note" id="map-note">Five lights to guide your way.</p></section>
+          <section class="quest-panel"><p class="eyebrow">RESTORE THE CASTLE</p><div class="score-row"><strong id="score">0</strong><span id="score-goal">/ 20,000</span></div><div class="progress-track" role="progressbar" id="score-progress" aria-label="Progress toward restoring the castle" aria-valuemin="0" aria-valuemax="20000" aria-valuenow="0"><span id="score-fill"></span></div><p id="quest-text">Gather knowledge. Find the stairs. Break the spell.</p><div class="stat-pair"><div><b id="rooms-count">1</b><span>rooms explored</span></div><div><b id="answers-count">0</b><span>doors unlocked</span></div></div></section>
+          <button class="help-link" id="help-button">How to play & credits <span>?</span></button>
+        </aside>
+      </div>
+      <footer><span id="save-status">Your journey is saved on this device.</span><span>Inspired by a little CD-ROM magic. <b>Powered by curiosity.</b></span><span>v0.1.0 · Lanternlight</span></footer>
+    </main>
+  </div>
+  <dialog id="welcome-dialog" class="parchment welcome-dialog" aria-labelledby="welcome-title">
+    <button class="close-button" id="close-welcome" aria-label="Return to the castle" hidden>×</button>
+    <div class="welcome-mark">✧</div><p class="eyebrow">WELCOME TO REMINDMAZE</p><h2 id="welcome-title">Some doors open<br>with a little knowledge.</h2><p class="welcome-story">Beyond a forgotten book lies a castle that has lost its memories. Walk its winding halls, meet its curious residents, and answer your way back into the light.</p>
+    <button id="continue-button" class="gold-button continue-button" hidden>Continue your journey →</button>
+    <form id="start-form">
+      <div class="form-row"><label>Your traveler’s name<input name="name" id="traveler-name" maxlength="24" placeholder="Traveler" autocomplete="given-name"></label><label>Question difficulty<select name="difficulty"><option value="1">I · Wanderer</option><option value="2" selected>II · Apprentice</option><option value="3">III · Scholar</option><option value="4">IV · Sage</option></select></label></div>
+      <div class="form-row"><label>Journey length<select name="goal"><option value="20000">Classic quest · 20,000 points</option><option value="5000">Short adventure · 5,000 points</option></select></label><label>Your pace<select name="mode"><option value="classic">Classic · speed bonus</option><option value="study">Study · no timer</option></select></label></div>
+      <fieldset><legend>What sparks your curiosity? <button id="select-all" class="text-button" type="button">Select all</button></legend><div id="category-options" class="category-options"></div></fieldset>
+      <p class="form-note">Includes questions up to your chosen difficulty. Research is always welcome.</p><button class="gold-button start-button" type="submit" id="start-button">Enter the castle <span>→</span></button>
+    </form>
+    <p class="welcome-foot">108 sourced questions · 9 subjects · a different maze every journey</p>
+  </dialog>
+  <dialog id="question-dialog" class="parchment question-dialog" aria-labelledby="question-title">
+    <div class="question-top"><span id="question-category" class="eyebrow">HISTORY</span><span id="question-tier">I · Wanderer</span><button id="leave-question" class="close-button" aria-label="Leave this question">×</button></div>
+    <p class="question-context" id="question-context">A question guards the north door.</p><h2 id="question-title"></h2>
+    <div class="question-meter"><span id="points-available">350 points available</span><div class="bonus-track"><span id="bonus-fill"></span></div><span id="timer-label">Speed bonus</span></div>
+    <div id="answers" class="answers"></div><div id="answer-feedback" class="answer-feedback" aria-live="polite"></div>
+    <div class="question-actions"><button id="research-question" class="text-button">▤ &nbsp; Look it up in Wikipedia <span>↗</span></button><button id="question-next" class="gold-button" hidden>Open the door →</button></div>
+    <p class="question-foot" id="question-foot">Two attempts. No loss of accumulated points. Keys 1–4 choose an answer.</p>
+  </dialog>
+  <dialog id="reader-dialog" class="parchment reader-dialog" aria-labelledby="reader-title">
+    <button class="close-button" data-close="reader-dialog" aria-label="Close the library">×</button><p class="eyebrow">THE WIKIPEDIA READING ROOM</p><h2 id="reader-title">Follow your curiosity.</h2>
+    <form id="search-form" class="search-form"><label class="sr-only" for="article-search">Search Wikipedia</label><input id="article-search" placeholder="A person, a place, an idea…" autocomplete="off" maxlength="160"><button class="gold-button" type="submit">Search</button></form>
+    <div id="reader-content" aria-live="polite"></div><div id="reader-links" class="reader-links"></div><p class="license-note">Article extracts by Wikipedia contributors · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Summaries may be shortened. Follow the article’s references to explore its evidence.</p>
+  </dialog>
+  <dialog id="journal-dialog" class="parchment journal-dialog" aria-labelledby="journal-title"><button class="close-button" data-close="journal-dialog" aria-label="Close your journal">×</button><p class="eyebrow">NOTES FROM THE JOURNEY</p><h2 id="journal-title">Your book of discoveries.</h2><p id="journal-summary"></p><div id="journal-entries"></div><button id="export-save" class="text-button">↓ Export journey</button><label class="text-button import-label">↑ Import journey<input id="import-save" type="file" accept="application/json,.json"></label><p id="import-status" aria-live="polite"></p></dialog>
+  <dialog id="help-dialog" class="parchment help-dialog" aria-labelledby="help-title"><button class="close-button" data-close="help-dialog" aria-label="Close help">×</button><p class="eyebrow">A SMALL GUIDE FOR A LARGE CASTLE</p><h2 id="help-title">Let curiosity lead.</h2><ol><li><b>Explore the rooms.</b> Click a doorway or use the arrow keys / WASD. The view always faces north; south is behind you.</li><li><b>Answer to unlock a door.</b> You get two attempts. A second miss reveals an explanation, then offers a fresh question. Open doors stay open.</li><li><b>Find the stairs.</b> The gold stair symbol is always visible on your map. Torches reveal a route for 12 seconds. You have five for the whole journey.</li><li><b>Restore the castle.</b> Reach your point goal, then use the stairs on your current floor. Before reaching the goal, stairs lead to a new floor.</li></ol><h3>Take the scenic route</h3><p>Click the inhabitant to talk, or the framed atlas to read. Wikipedia research is encouraged: looking up a question removes its speed bonus, but the door and base points are still yours to earn. Study mode has no speed bonus or countdown.</p><p>Base points: 150 / 250 / 400 / 600 by question tier. Classic adds up to 200 speed points, decreasing by four each second. A first wrong attempt reduces the possible award by 50. Your existing score is never reduced.</p><p><kbd>1–4</kbd> answer · <kbd>T</kbd> torch · <kbd>J</kbd> journal · <kbd>L</kbd> library · <kbd>Esc</kbd> close a panel. Menus pause the active timer. Sound is optional and starts muted.</p><h3>About this little castle</h3><p>reMindMaze is an independent tribute to Encarta MindMaze, with original code, procedural artwork, characters, and dialogue. It contains no Encarta assets and is not affiliated with Microsoft or the Wikimedia Foundation.</p><p>The starter pack contains 108 original questions informed by 27 Wikipedia articles. Source links and explanations accompany every question. The pack is curated; live Wikipedia pages are for reading, not automatically generated questions. Questions repeat after the selected pool is exhausted.</p><p>Code and original artwork: MIT. Question pack and adapted factual explanations: CC BY-SA 4.0; attribution to the linked Wikipedia contributors. See the repository’s CREDITS.md for details.</p></dialog>
+  <dialog id="win-dialog" class="parchment win-dialog" aria-labelledby="win-title"><div class="welcome-mark">✦</div><p class="eyebrow">THE CASTLE REMEMBERS</p><h2 id="win-title">You brought back the light.</h2><p>The last door opens. Names return to portraits. Music spills into the halls. Somewhere in the garden, a very relieved beekeeper cheers.</p><blockquote>“You did not arrive knowing everything,” Mira says. “You kept asking. That was enough.”</blockquote><p id="win-stats"></p><button id="win-journal" class="quiet">Read your discoveries</button><button id="new-journey" class="gold-button">Another adventure →</button></dialog>
+  <div id="toast" role="status"></div>
+  <noscript><p class="noscript">reMindMaze needs JavaScript to run. Enable it in your browser, then reload.</p></noscript>
+  <script>
+'use strict';
+(()=>{
+// engine.js
+const VERSION = 1;
+const SIZE = 10;
+const DIRECTIONS = [
+  { id: 'n', label: 'North', dx: 0, dy: -1, key: 'ArrowUp' },
+  { id: 'e', label: 'East', dx: 1, dy: 0, key: 'ArrowRight' },
+  { id: 's', label: 'South', dx: 0, dy: 1, key: 'ArrowDown' },
+  { id: 'w', label: 'West', dx: -1, dy: 0, key: 'ArrowLeft' },
+];
+const TIERS = ['Wanderer', 'Apprentice', 'Scholar', 'Sage'];
+function random(seed) {
+  let n = seed >>> 0;
+  return () => {
+    n += 0x6D2B79F5;
+    let t = Math.imul(n ^ n >>> 15, 1 | n);
+    t ^= t + Math.imul(t ^ t >>> 7, 61 | t);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function shuffle(items, rng = Math.random) {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+function adjacent(index, size = SIZE) {
+  const x = index % size, y = Math.floor(index / size);
+  return DIRECTIONS.flatMap(d => {
+    const xx = x + d.dx, yy = y + d.dy;
+    return xx >= 0 && xx < size && yy >= 0 && yy < size ? [{ ...d, to: yy * size + xx }] : [];
+  });
+}
+const edge = (a, b) => [Math.min(a, b), Math.max(a, b)].join(':');
+function pathTo(maze, start, end) {
+  const previous = new Map([[start, null]]), queue = [start];
+  for (let i = 0; i < queue.length; i++) {
+    const room = queue[i];
+    if (room === end) break;
+    for (const n of maze[room]) if (!previous.has(n)) { previous.set(n, room); queue.push(n); }
+  }
+  if (!previous.has(end)) return [];
+  const route = [end];
+  while (route[route.length - 1] !== start) route.push(previous.get(route[route.length - 1]));
+  return route.reverse();
+}
+function makeFloor(seed, floor = 1) {
+  const rng = random(seed + floor * 3571), maze = Array.from({ length: SIZE * SIZE }, () => []);
+  const start = 90, stack = [start], visited = new Set(stack);
+  const connect = (a, b) => { maze[a].push(b); maze[b].push(a); };
+  while (stack.length) {
+    const a = stack[stack.length - 1];
+    const neighbors = shuffle(adjacent(a).map(d => d.to).filter(n => !visited.has(n)), rng);
+    if (!neighbors.length) { stack.pop(); continue; }
+    const b = neighbors[0]; connect(a, b); visited.add(b); stack.push(b);
+  }
+  // A handful of loops give players alternate routes, not only a single winding corridor.
+  for (let i = 0; i < 10; i++) {
+    const a = Math.floor(rng() * maze.length);
+    const b = shuffle(adjacent(a).map(d => d.to).filter(n => !maze[a].includes(n)), rng)[0];
+    if (b !== undefined) connect(a, b);
+  }
+  let exit = start, longest = 0;
+  for (let n = 0; n < maze.length; n++) {
+    const length = pathTo(maze, start, n).length;
+    if (length > longest) { exit = n; longest = length; }
+  }
+  return { maze, pos: start, exit, visited: [start], unlocked: [] };
+}
+function newGame(settings = {}, seed = Date.now() >>> 0) {
+  return {
+    version: VERSION, seed, floor: 1, score: 0, torches: 5, solved: 0, attempts: 0,
+    name: String(settings.name || 'Traveler').trim().slice(0, 24) || 'Traveler',
+    difficulty: Math.min(4, Math.max(1, Number(settings.difficulty) || 2)),
+    categories: settings.categories?.length ? [...settings.categories] : [],
+    mode: settings.mode === 'study' ? 'study' : 'classic',
+    goal: settings.goal === 5000 ? 5000 : 20000,
+    seen: [], journal: [], pending: null, won: false,
+    ...makeFloor(seed),
+  };
+}
+function exits(state) {
+  return adjacent(state.pos).filter(d => state.maze[state.pos].includes(d.to))
+    .map(d => ({ ...d, open: state.unlocked.includes(edge(state.pos, d.to)) }));
+}
+function questionPool(state, questions) {
+  return questions.filter(q => q.level <= state.difficulty && (!state.categories.length || state.categories.includes(q.category)));
+}
+function beginDoor(state, to, questions, rng = Math.random) {
+  if (state.won || state.pending || !state.maze[state.pos].includes(to)) return false;
+  if (state.unlocked.includes(edge(state.pos, to))) { enter(state, to); return 'moved'; }
+  const pool = questionPool(state, questions);
+  if (!pool.length) throw new Error('No questions match these subjects.');
+  let remaining = pool.filter(q => !state.seen.includes(q.id));
+  if (!remaining.length) {
+    const last = state.seen.at(-1);
+    state.seen = [];
+    remaining = pool.filter(q => q.id !== last);
+    if (!remaining.length) remaining = pool;
+  }
+  const q = remaining[Math.floor(rng() * remaining.length)];
+  state.seen.push(q.id);
+  state.pending = { id: q.id, from: state.pos, to, options: shuffle(q.choices, rng), wrong: [], elapsed: 0, status: 'asking', researched: false, payout: 0 };
+  return 'question';
+}
+function pointsFor(state, question) {
+  const base = [0, 150, 250, 400, 600][question.level];
+  const p = state.pending;
+  const bonus = state.mode === 'classic' && !p.researched ? Math.max(0, 200 - Math.floor(p.elapsed / 1000) * 4) : 0;
+  return Math.max(50, base + bonus - p.wrong.length * 50);
+}
+function answer(state, choice, questions) {
+  const p = state.pending;
+  if (!p || p.status !== 'asking' || !p.options.includes(choice) || p.wrong.includes(choice)) return null;
+  const q = questions.find(q => q.id === p.id);
+  state.attempts++;
+  if (choice === q.answer) {
+    p.payout = pointsFor(state, q);
+    p.status = 'correct';
+    state.score += p.payout;
+    state.solved++;
+    const key = edge(p.from, p.to);
+    if (!state.unlocked.includes(key)) state.unlocked.push(key);
+  } else {
+    p.wrong.push(choice);
+    if (p.wrong.length === 2) p.status = 'failed';
+  }
+  if (p.status !== 'asking') state.journal.unshift({ id: q.id, correct: p.status === 'correct', floor: state.floor, points: p.payout });
+  state.journal = state.journal.slice(0, 200);
+  return p.status;
+}
+function enter(state, to) {
+  if (!state.maze[state.pos].includes(to) || !state.unlocked.includes(edge(state.pos, to))) return false;
+  state.pos = to;
+  if (!state.visited.includes(to)) state.visited.push(to);
+  state.pending = null;
+  return true;
+}
+function ascend(state) {
+  if (state.pos !== state.exit || state.pending || state.won) return false;
+  if (state.score >= state.goal) { state.won = true; return 'won'; }
+  state.floor++;
+  Object.assign(state, makeFloor(state.seed, state.floor));
+  return 'floor';
+}
+function useTorch(state) {
+  if (state.torches <= 0 || state.won) return [];
+  state.torches--;
+  return pathTo(state.maze, state.pos, state.exit);
+}
+function validSave(value, questions, categories) {
+  try {
+    const s = value;
+    if (s.version !== VERSION || !Number.isInteger(s.seed) || s.seed < 0 || s.seed > 0xFFFFFFFF) return false;
+    const nonnegative = ['score', 'solved', 'attempts', 'floor', 'torches', 'pos', 'exit'];
+    if (nonnegative.some(k => !Number.isSafeInteger(s[k]) || s[k] < 0)) return false;
+    if (s.floor < 1 || s.floor > 10000 || s.torches > 5 || s.pos > 99 || s.exit > 99) return false;
+    if (![1,2,3,4].includes(s.difficulty) || ![5000,20000].includes(s.goal) || !['study','classic'].includes(s.mode)) return false;
+    if (typeof s.name !== 'string' || s.name.length > 24 || typeof s.won !== 'boolean') return false;
+    if (!Array.isArray(s.categories) || s.categories.some(c => !categories.includes(c))) return false;
+    if (!Array.isArray(s.maze) || s.maze.length !== 100) return false;
+    const generated = makeFloor(s.seed, s.floor);
+    if (JSON.stringify(s.maze) !== JSON.stringify(generated.maze) || s.exit !== generated.exit) return false;
+    if (!Array.isArray(s.visited) || !s.visited.includes(s.pos) || s.visited.some(n => !Number.isInteger(n) || n < 0 || n > 99)) return false;
+    if (!Array.isArray(s.unlocked) || s.unlocked.some(e => {
+      if (typeof e !== 'string') return true;
+      const [a,b] = e.split(':').map(Number);
+      return !s.maze[a]?.includes(b) || edge(a,b) !== e;
+    })) return false;
+    const ids = new Set(questions.map(q => q.id));
+    if (!Array.isArray(s.seen) || s.seen.length > questions.length || s.seen.some(id => !ids.has(id))) return false;
+    if (!Array.isArray(s.journal) || s.journal.length > 200 || s.journal.some(j => !ids.has(j.id) || typeof j.correct !== 'boolean' || !Number.isSafeInteger(j.points) || j.points < 0 || !Number.isSafeInteger(j.floor) || j.floor < 1)) return false;
+    if (s.pending) {
+      const p = s.pending, q = questions.find(q => q.id === p.id);
+      if (!q || p.from !== s.pos || !s.maze[s.pos].includes(p.to)) return false;
+      if (!Array.isArray(p.options) || p.options.length !== 4 || new Set(p.options).size !== 4 || p.options.some(x => !q.choices.includes(x))) return false;
+      if (!Array.isArray(p.wrong) || p.wrong.length > 2 || p.wrong.some(x => !q.choices.includes(x) || x === q.answer) || new Set(p.wrong).size !== p.wrong.length) return false;
+      if (!['asking','correct','failed'].includes(p.status) || !Number.isFinite(p.elapsed) || p.elapsed < 0 || typeof p.researched !== 'boolean' || !Number.isSafeInteger(p.payout) || p.payout < 0) return false;
+      if ((p.status === 'asking' && p.wrong.length > 1) || (p.status === 'failed' && p.wrong.length !== 2)) return false;
+      if (p.status === 'correct' && !s.unlocked.includes(edge(p.from,p.to))) return false;
+    }
+    return true;
+  } catch { return false; }
+}
+
+// questions.js
+// Original question wording. Factual sources: the linked Wikipedia articles.
+// Each source group contains one question at each of four editorial difficulty tiers.
+const CATEGORIES = [
+  { id:'history', name:'History', symbol:'⌛', color:'#bf8e64' },
+  { id:'geography', name:'Geography', symbol:'◈', color:'#81aaa2' },
+  { id:'nature', name:'Natural world', symbol:'❧', color:'#a3b879' },
+  { id:'science', name:'Science', symbol:'✧', color:'#92a9d0' },
+  { id:'arts', name:'Arts & music', symbol:'♫', color:'#c696ac' },
+  { id:'literature', name:'Literature', symbol:'❦', color:'#c5a978' },
+  { id:'games', name:'Sports & games', symbol:'♜', color:'#b9b0d3' },
+  { id:'technology', name:'Inventions', symbol:'⚙', color:'#d1a66b' },
+  { id:'language', name:'Language', symbol:'Ω', color:'#83b9ba' },
+];
+const sourceURL = title => `https://en.wikipedia.org/wiki/${encodeURIComponent(title.replaceAll(' ', '_'))}`;
+const groups = [
+['history','Ancient Egypt',[
+['Which river sustained ancient Egyptian agriculture?','Nile|Danube|Amazon|Indus','Seasonal Nile flooding and irrigation supported farming.'],
+['Which title is associated with the rulers of ancient Egypt?','Pharaoh|Consul|Shogun|Doge','The pharaoh stood at the head of Egyptian government.'],
+['Which material did Egyptians make from a wetland plant for writing?','Papyrus|Porcelain|Vellum|Silk','Papyrus sheets were made from the stems of the papyrus plant.'],
+['Which ancient Egyptian official oversaw administration beneath the pharaoh?','Vizier|Tribune|Ephor|Archon','The vizier coordinated major government responsibilities.'],
+]],
+['history','Rosetta Stone',[
+['The Rosetta Stone helped scholars decipher which writing system?','Egyptian hieroglyphs|Maya glyphs|Linear A|Rongorongo','Parallel inscriptions helped unlock Egyptian writing.'],
+['Which language appears in the lowest inscription on the Rosetta Stone?','Ancient Greek|Latin|Sanskrit|Akkadian','The lower text is Greek; the other two use Egyptian scripts.'],
+['In which year was the Rosetta Stone found by French forces?','1799|1492|1822|1922','It was found at Fort Julien near Rashid in 1799.'],
+['Which king is named in the decree recorded on the Rosetta Stone?','Ptolemy V|Ramesses II|Akhenaten|Tutankhamun','The decree was issued in 196 BCE for Ptolemy V.'],
+]],
+['history','Printing press',[
+['What does a printing press transfer onto a surface such as paper?','Ink|Molten glass|Electric charge only|Woven thread','A press applies pressure to an inked surface to make an impression.'],
+['Who developed a movable-type printing press in fifteenth-century Europe?','Johannes Gutenberg|Isaac Newton|Galileo Galilei|James Watt','Gutenberg combined several techniques into a practical printing system.'],
+['Which kind of ink did Gutenberg use for printing with metal type?','Oil-based ink|Invisible ink|Water alone|Chalk dust','Oil-based ink worked well with metal printing type.'],
+['Which three metals formed Gutenberg’s type alloy?','Lead, tin, antimony|Iron, nickel, cobalt|Copper, silver, gold|Aluminum, zinc, magnesium','This alloy made durable, reproducible pieces of type.'],
+]],
+['geography','Africa',[
+['The Sahara is on which continent?','Africa|Asia|Australia|South America','The Sahara spans much of northern Africa.'],
+['Which sea borders Africa to the north?','Mediterranean Sea|Baltic Sea|Caribbean Sea|Bering Sea','The Mediterranean separates northern Africa from southern Europe.'],
+['By area, where does Africa rank among the continents?','Second|First|Third|Fourth','Only Asia has a larger land area.'],
+['Which strait separates northwestern Africa from mainland Europe?','Strait of Gibraltar|Strait of Malacca|Bering Strait|Bass Strait','The Strait of Gibraltar lies between Morocco and Spain.'],
+]],
+['geography','Andes',[
+['Along which continent do the Andes run?','South America|Europe|Africa|Australia','The Andes follow the western side of South America.'],
+['Which ocean lies west of the Andes?','Pacific Ocean|Atlantic Ocean|Indian Ocean|Arctic Ocean','The mountains run near South America’s Pacific coast.'],
+['What is the highest peak in the Andes?','Aconcagua|Kilimanjaro|Denali|Mont Blanc','Aconcagua is in Argentina and rises to about 6,961 metres.'],
+['Across how many countries does the Andean mountain chain extend?','Seven|Three|Five|Ten','It extends from Venezuela south to Chile and Argentina.'],
+]],
+['geography','Japan',[
+['What is the capital of Japan?','Tokyo|Kyoto|Osaka|Sapporo','Tokyo is Japan’s capital.'],
+['Japan’s islands lie in which ocean?','Pacific Ocean|Atlantic Ocean|Arctic Ocean|Southern Ocean','Japan is an island country off the eastern coast of Asia.'],
+['Which Japanese island contains both Tokyo and Kyoto?','Honshu|Hokkaido|Shikoku|Kyushu','Honshu is the largest of Japan’s main islands.'],
+['Which is Japan’s largest freshwater lake?','Lake Biwa|Lake Baikal|Lake Toba|Lake Victoria','Lake Biwa is an ancient lake in Shiga Prefecture.'],
+]],
+['nature','Photosynthesis',[
+['Which energy source drives photosynthesis in green plants?','Sunlight|Sound|Wind|Magnetism','Photosynthesis converts light energy into chemical energy.'],
+['Which gas do green plants release during oxygenic photosynthesis?','Oxygen|Helium|Methane|Argon','Oxygen is released by the light-dependent reactions.'],
+['In which organelles does photosynthesis occur in plants?','Chloroplasts|Ribosomes|Lysosomes|Centrioles','Chloroplasts contain the membranes and pigments needed for photosynthesis.'],
+['The oxygen released by plant photosynthesis comes directly from splitting what?','Water|Carbon dioxide|Glucose|Nitrogen','Water is split during the light-dependent reactions.'],
+]],
+['nature','Octopus',[
+['How many arms does a typical octopus have?','Eight|Six|Ten|Twelve','Octopuses are eight-armed molluscs.'],
+['An octopus belongs to which animal group?','Molluscs|Reptiles|Crustaceans|Mammals','Octopuses are cephalopod molluscs.'],
+['How many hearts does an octopus have?','Three|One|Two|Four','Two hearts supply the gills; one supplies the rest of the body.'],
+['Which oxygen-carrying protein contributes to an octopus’s blue blood?','Hemocyanin|Hemoglobin|Keratin|Collagen','Hemocyanin contains copper and carries oxygen in the blood.'],
+]],
+['nature','Honey bee',[
+['Which sweet substance do honey bees produce and store?','Honey|Maple syrup|Molasses|Caramel','Honey is produced from nectar and stored in the nest.'],
+['What are male honey bees called?','Drones|Workers|Queens|Nymphs','Drones are the male members of a honey bee colony.'],
+['What behavior communicates the location of food to other workers?','Waggle dance|Wing shedding|Nest abandonment|Winter hibernation','Foraging bees communicate resource information through dance.'],
+['Honey bees belong to which genus?','Apis|Bombus|Vespa|Formica','Apis is the honey bee genus; Bombus contains bumblebees.'],
+]],
+['science','Solar System',[
+['Which star is at the center of our Solar System?','The Sun|Sirius|Polaris|Vega','The Solar System is gravitationally bound to the Sun.'],
+['Which planet is the largest in our Solar System?','Jupiter|Earth|Saturn|Neptune','Jupiter is the largest of the eight planets.'],
+['Between which two planets is the main asteroid belt?','Mars and Jupiter|Earth and Mars|Jupiter and Saturn|Uranus and Neptune','The main asteroid belt lies beyond Mars and inside Jupiter’s orbit.'],
+['Which pair of planets is classified as ice giants?','Uranus and Neptune|Jupiter and Saturn|Venus and Earth|Mercury and Mars','Uranus and Neptune differ in composition from the gas giants.'],
+]],
+['science','Atom',[
+['What is the central part of an atom called?','Nucleus|Crust|Membrane|Mantle','The nucleus contains protons and, in most atoms, neutrons.'],
+['Which particle has a negative electric charge?','Electron|Proton|Neutron|Photon','Electrons carry negative charge.'],
+['What determines the chemical element of an atom?','Number of protons|Number of neutrons|Number of electron shells|Its temperature','The proton count is the atomic number.'],
+['Isotopes of one element differ in their number of what?','Neutrons|Protons|Quarks per proton|Positive charges per proton','Isotopes share an atomic number but have different neutron counts.'],
+]],
+['science','Sound',[
+['Sound is produced by what kind of motion?','Vibration|Constant position|Perfect stillness|Uniform color change','Sound propagates as a mechanical disturbance through a medium.'],
+['Which unit measures the frequency of a sound wave?','Hertz|Joule|Pascal|Kelvin','One hertz means one cycle per second.'],
+['Why can ordinary sound not travel through a perfect vacuum?','There is no material medium|Gravity is too strong|Light blocks it|It has no color','Sound requires matter through which vibrations can propagate.'],
+['In air, sound travels mainly as which kind of wave?','Longitudinal|Transverse electromagnetic|Standing light|Gravitational','Air particles oscillate parallel to the wave’s direction of travel.'],
+]],
+['arts','Piano',[
+['Which part of a piano does a player normally press with their fingers?','Keys|Strings directly|Tuning pins|Soundboard','A piano keyboard controls the action inside the instrument.'],
+['What strikes the strings inside an acoustic piano?','Hammers|Plectrums|Bows|Air jets','Pressing a key operates a hammer that strikes strings.'],
+['How many keys does a typical modern full-size piano have?','88|64|72|96','The standard keyboard has 52 white keys and 36 black keys.'],
+['Who is credited with inventing the piano?','Bartolomeo Cristofori|Antonio Stradivari|Adolphe Sax|Theobald Boehm','Cristofori developed the instrument around 1700 in Italy.'],
+]],
+['arts','Mona Lisa',[
+['Who painted the Mona Lisa?','Leonardo da Vinci|Vincent van Gogh|Claude Monet|Pablo Picasso','Leonardo painted the portrait during the Italian Renaissance.'],
+['Which Paris museum houses the Mona Lisa?','Louvre|Musée d’Orsay|Centre Pompidou|Musée Rodin','The painting belongs to the Louvre’s collection.'],
+['The Mona Lisa is painted on a panel of which wood?','Poplar|Mahogany|Bamboo|Ebony','The painting uses oil on a poplar panel.'],
+['The portrait is generally identified as depicting which woman?','Lisa del Giocondo|Isabella d’Este|Catherine de’ Medici|Artemisia Gentileschi','Lisa del Giocondo is the generally accepted sitter.'],
+]],
+['arts','Sonnet',[
+['A traditional sonnet has how many lines?','Fourteen|Eight|Twelve|Twenty','The sonnet is traditionally a fourteen-line poetic form.'],
+['The sonnet originated in which country?','Italy|Japan|Egypt|Norway','Its origins are associated with medieval Sicily.'],
+['How is a typical Petrarchan sonnet divided?','Octave and sestet|Two equal septets|Three quintains|Four tercets','An octave of eight lines is followed by a sestet of six.'],
+['What is the turn in thought in a sonnet often called?','Volta|Coda|Refrain|Caesura','The volta marks a turn or shift in the poem’s argument.'],
+]],
+['literature','William Shakespeare',[
+['Who wrote Hamlet?','William Shakespeare|Charles Dickens|Jane Austen|John Milton','Hamlet is one of Shakespeare’s tragedies.'],
+['In which English town was Shakespeare born?','Stratford-upon-Avon|Bath|York|Canterbury','Shakespeare was born in Stratford-upon-Avon.'],
+['Which London theatre is closely associated with Shakespeare’s company?','Globe|La Scala|Odéon|Bolshoi','The company built the Globe Theatre in 1599.'],
+['How many sonnets are in Shakespeare’s collection published in 1609?','154|100|128|200','The 1609 collection contains 154 sonnets.'],
+]],
+['literature','The Hobbit',[
+['Who is the hobbit at the center of The Hobbit?','Bilbo Baggins|Frodo Baggins|Samwise Gamgee|Meriadoc Brandybuck','Bilbo leaves home to join the dwarves’ quest.'],
+['What is the name of the dragon in The Hobbit?','Smaug|Glaurung|Ancalagon|Saphira','Smaug occupies the dwarves’ former home and treasure.'],
+['In which year was The Hobbit first published?','1937|1917|1954|1967','J. R. R. Tolkien’s novel was first published in 1937.'],
+['Which dwarf leads the company that hires Bilbo?','Thorin Oakenshield|Balin|Gimli|Dáin Ironfoot','Thorin leads the expedition to reclaim the Lonely Mountain.'],
+]],
+['literature','Homer',[
+['Homer is traditionally associated with literature in which language?','Ancient Greek|Latin|Old English|Sanskrit','The Homeric epics are works of ancient Greek poetry.'],
+['Which two epics are traditionally attributed to Homer?','Iliad and Odyssey|Aeneid and Metamorphoses|Beowulf and Edda|Inferno and Purgatorio','The Iliad and Odyssey are the two Homeric epics.'],
+['Whose journey home is the central subject of the Odyssey?','Odysseus|Achilles|Hector|Agamemnon','The Odyssey follows Odysseus’s return from the Trojan War.'],
+['In which meter are the Homeric epics composed?','Dactylic hexameter|Iambic pentameter|Trochaic tetrameter|Anapestic trimeter','The epics use dactylic hexameter, the Greek epic meter.'],
+]],
+['games','Chess',[
+['How many squares are on a standard chessboard?','64|49|81|100','The board has eight rows and eight columns.'],
+['Which chess piece moves in an L-shaped pattern?','Knight|Bishop|Rook|King','A knight moves two squares along one axis and one along the other.'],
+['Which special move involves both a king and a rook?','Castling|En passant|Promotion|Forking','Castling moves the king and one rook under specific conditions.'],
+['Which special pawn capture must occur immediately after an opposing pawn’s two-square advance?','En passant|Castling|Promotion|Stalemate','En passant is available only on the immediately following move.'],
+]],
+['games','Basketball',[
+['In standard basketball, what is the target for scoring?','An elevated hoop|A ground-level net|A wicket|A finish line','Points are scored by putting the ball through the basket.'],
+['How many players from each team are normally on court?','Five|Six|Seven|Eleven','Standard basketball uses two teams of five on the court.'],
+['Who invented basketball in 1891?','James Naismith|William Morgan|Walter Camp|Abner Doubleday','Naismith devised the game as an indoor activity.'],
+['In which Massachusetts city was basketball invented?','Springfield|Boston|Salem|Worcester','Naismith developed basketball in Springfield, Massachusetts.'],
+]],
+['games','Olympic Games',[
+['How many interlocking rings are in the Olympic symbol?','Five|Four|Six|Seven','The Olympic symbol contains five interlocking rings.'],
+['The ancient Olympic Games took place in which civilization?','Ancient Greece|Ancient Egypt|Han China|Inca Empire','The ancient festival was held at Olympia in Greece.'],
+['Which city hosted the first modern Olympic Games in 1896?','Athens|Paris|London|Rome','Athens hosted the first modern Games.'],
+['Who founded the International Olympic Committee in 1894?','Pierre de Coubertin|Jules Rimet|James Naismith|Avery Brundage','Coubertin helped establish the IOC and revive the Games.'],
+]],
+['technology','World Wide Web',[
+['What do you normally use to view pages on the World Wide Web?','Web browser|Compiler|Disk formatter|Device driver','Browsers retrieve and display web pages.'],
+['Who invented the World Wide Web?','Tim Berners-Lee|Alan Turing|Charles Babbage|Alexander Graham Bell','Berners-Lee invented the Web while working at CERN.'],
+['What does the H in HTML stand for?','HyperText|High-speed|Hardware|Hierarchical','HTML stands for HyperText Markup Language.'],
+['At which research organization was the Web developed?','CERN|NASA|Bell Labs|Royal Society','The Web began at CERN as a way to share information.'],
+]],
+['technology','Steam engine',[
+['What working fluid powers a steam engine?','Steam|Liquid mercury|Compressed helium|Molten salt','Steam engines use steam to perform mechanical work.'],
+['A steam engine is an example of what kind of engine?','External combustion|Internal combustion|Ion propulsion|Electric induction','Heat is supplied outside the working cylinder or turbine.'],
+['What improvement helped James Watt’s engine use less fuel?','A separate condenser|A spark plug|A carburetor|A diesel injector','A separate condenser reduced repeated heating and cooling of the cylinder.'],
+['Whose atmospheric engine preceded Watt’s improvements?','Thomas Newcomen|Rudolf Diesel|Nikolaus Otto|Frank Whittle','Newcomen’s atmospheric engine was used for pumping water.'],
+]],
+['technology','Bicycle',[
+['How many wheels does a conventional bicycle have?','Two|One|Three|Four','A conventional bicycle has two wheels arranged in line.'],
+['On a typical chain-driven bicycle, which wheel is driven by the pedals?','Rear wheel|Front wheel|Both equally|Neither wheel','The chain transfers power to a sprocket on the rear wheel.'],
+['What mechanism shifts a bicycle chain between sprockets?','Derailleur|Caliper|Headset|Spoke nipple','A derailleur moves the chain sideways to another sprocket.'],
+['In a lower gear, one pedal revolution produces what?','Fewer rear-wheel revolutions|More rear-wheel revolutions|Exactly one wheel revolution|No chain movement','A low gear trades distance per pedal turn for easier pedaling.'],
+]],
+['language','Spanish language',[
+['Spanish belongs to which language group?','Romance|Germanic|Slavic|Celtic','Spanish is a Romance language descended from Latin.'],
+['From which earlier language did Spanish develop?','Vulgar Latin|Old Norse|Classical Arabic|Sanskrit','Spanish evolved from spoken Latin on the Iberian Peninsula.'],
+['What other name is commonly used for the Spanish language?','Castilian|Catalan|Galician|Basque','Castilian refers to its origins in the region of Castile.'],
+['Which historical kingdom gave Castilian its name?','Castile|Wessex|Bavaria|Burgundy','The language originated in the Kingdom of Castile.'],
+]],
+['language','Braille',[
+['Braille is primarily read using which sense?','Touch|Hearing|Smell|Taste','Raised dot patterns can be read with the fingertips.'],
+['Who developed the writing system called braille?','Louis Braille|Louis Pasteur|Alexander Bell|Samuel Morse','Louis Braille developed the system in nineteenth-century France.'],
+['How many dot positions are in a traditional braille cell?','Six|Four|Eight|Ten','A traditional cell has two columns of three dot positions.'],
+['Including the blank cell, how many patterns are possible in a six-dot cell?','64|32|36|128','Six on-or-off positions give 2 to the sixth power: 64 patterns.'],
+]],
+['language','Greek alphabet',[
+['Which letter begins the Greek alphabet?','Alpha|Beta|Gamma|Delta','Alpha is the first letter of the Greek alphabet.'],
+['Which letter ends the standard Greek alphabet?','Omega|Sigma|Psi|Phi','Omega is its final letter.'],
+['How many letters are in the standard Greek alphabet?','24|26|28|22','The standard Greek alphabet contains 24 letters.'],
+['The Greek alphabet was adapted from which earlier alphabet?','Phoenician|Cyrillic|Runic|Hangul','Greek adapted the Phoenician alphabet and developed vowel letters.'],
+]],
+];
+const QUESTIONS = groups.flatMap(([category, source, rows], group) => rows.map(([prompt, answers, explanation], index) => {
+  const choices = answers.split('|');
+  return { id: `lantern-${String(group * 4 + index + 1).padStart(3,'0')}`, category, level:index+1, prompt, choices, answer:choices[0], explanation, source, url:sourceURL(source), checked:'2026-09-25' };
+}));
+
+// inhabitants.js
+const INHABITANTS = [
+  { name:'Mira', role:'the Archivist', room:'The Hall of Remembering', color:'#577a68', skin:'#b97e59', hair:'#372923', kind:'scholar', source:'Rosetta Stone', lines:[
+    'Welcome, traveler. These doors have forgotten how to open. Remind them of something true, and they remember.',
+    'I once catalogued every room in this castle. Then the rooms rearranged themselves. Very inconsiderate of them.',
+    'A name on a stone. A note in a margin. Sometimes the smallest surviving thing opens the largest door into the past.'
+  ]},
+  { name:'Peregrin', role:'the Cartographer', room:'The Mapmaker’s Gallery', color:'#8b674d', skin:'#d5a175', hair:'#49332e', kind:'traveler', source:'Andes', lines:[
+    'I have mapped seven kingdoms, three deserts, and half the pantry. The pantry remains my most dangerous expedition.',
+    'The little gold stair on your map is our way upward. A torch will show the route, but only for a little while.',
+    'There are a hundred rooms on this floor. You need not visit them all. Though I would never discourage a detour.'
+  ]},
+  { name:'Fern', role:'the Garden Keeper', room:'The Ivy Cloister', color:'#567047', skin:'#98633f', hair:'#282b20', kind:'gardener', source:'Honey bee', lines:[
+    'The ivy keeps growing through the curse. It seems nobody remembered to explain the situation to the ivy.',
+    'When the doors are difficult, take your time. Even an oak starts by getting one small thing right.',
+    'I keep bees in the western tower. They are the only residents who always agree on a direction.'
+  ]},
+  { name:'Orin', role:'the Stargazer', room:'The Astral Chamber', color:'#565d91', skin:'#c58e68', hair:'#dad1b7', kind:'wizard', source:'Solar System', lines:[
+    'Ah! Someone from beyond the walls. Tell me: are there still more stars than anyone can count? Good. I worry.',
+    'Being wrong is a useful place to begin. Staying incurious is a much more troublesome condition.',
+    'My telescope sees distant worlds. My spectacles, regrettably, are still missing.'
+  ]},
+  { name:'Cadence', role:'the Court Musician', room:'The Echoing Gallery', color:'#895776', skin:'#c1906d', hair:'#44242b', kind:'bard', source:'Piano', lines:[
+    'The castle has been stuck on the same melancholy chord for a century. A little knowledge might resolve it.',
+    'I wrote a song about a door that would not open. Nobody could get past the first verse.',
+    'A question, a pause, an answer. There is music in that, if you listen.'
+  ]},
+  { name:'Quill', role:'the Story Keeper', room:'The Whispering Library', color:'#6d5b80', skin:'#e0b386', hair:'#b6a890', kind:'scholar', source:'The Hobbit', lines:[
+    'Every good adventure begins when someone leaves a comfortable chair. Mine is over there, should you change your mind.',
+    'I keep a journal of things I learn. Yours is in the upper corner. An excellent habit for travelers.',
+    'There are books here about worlds that never were. Somehow they still tell us things that are true.'
+  ]},
+  { name:'Rook', role:'the Gate Warden', room:'The King’s Antechamber', color:'#667479', skin:'#a87550', hair:'#4b342b', kind:'knight', source:'Chess', lines:[
+    'No sword required, traveler. The lock prefers a well-informed answer. Much less paperwork for me.',
+    'A wrong answer costs no accumulated points. Think again. The doors are patient, even if they look stern.',
+    'I challenged the curse to chess. It declined. A suspicious lack of sportsmanship.'
+  ]},
+  { name:'Tamsin', role:'the Clockmaker', room:'The Brass Workshop', color:'#866743', skin:'#dda57c', hair:'#964e32', kind:'traveler', source:'Steam engine', lines:[
+    'The clock runs, the wheels turn, the doors sulk. Two out of three is a start.',
+    'A machine is a conversation between parts. A castle is much the same, only with more arguments about curtains.',
+    'Solved doors stay open. A sensible design. I am quite certain it was my idea.'
+  ]},
+  { name:'Sable', role:'the Interpreter', room:'The Scriptorium', color:'#4a757a', skin:'#885c43', hair:'#292421', kind:'scholar', source:'Braille', lines:[
+    'A hundred rooms, a hundred ways of saying welcome. I am working on the translation for the broom cupboard.',
+    'The book beside a question leads to the wider world. Please use it. Curiosity is precisely the point.',
+    'The curse confuses silence with emptiness. But there is more than one way to read, or speak, or know.'
+  ]},
+];
+const inhabitantFor = state => INHABITANTS[(state.pos * 7 + state.floor - 1) % INHABITANTS.length];
+
+// renderer.js
+function poly(c, points, fill, stroke) {
+  c.beginPath(); points.forEach(([x,y],i) => i ? c.lineTo(x,y) : c.moveTo(x,y)); c.closePath();
+  if(fill) { c.fillStyle=fill; c.fill(); } if(stroke) { c.strokeStyle=stroke; c.stroke(); }
+}
+function ellipse(c,x,y,rx,ry,color) { c.beginPath(); c.ellipse(x,y,rx,ry,0,0,Math.PI*2); c.fillStyle=color; c.fill(); }
+function line(c,x1,y1,x2,y2,color,width=1) { c.strokeStyle=color; c.lineWidth=width; c.beginPath(); c.moveTo(x1,y1); c.lineTo(x2,y2); c.stroke(); }
+function arch(c,x,y,w,h) {
+  c.beginPath(); c.moveTo(x,y+h); c.lineTo(x,y+w*.5); c.bezierCurveTo(x,y+w*.17,x+w*.3,y,x+w*.5,y-14);
+  c.bezierCurveTo(x+w*.7,y,x+w,y+w*.17,x+w,y+w*.5); c.lineTo(x+w,y+h); c.closePath();
+}
+function masonry(c, points, rng, tint=0) {
+  c.save(); poly(c,points); c.clip();
+  for(let row=0;row<15;row++) for(let col=-1;col<18;col++) {
+    const x=col*70+(row%2)*35,y=row*40;
+    const light=20+Math.floor(rng()*9)+tint;
+    c.fillStyle=`hsl(35 13% ${light}%)`; c.fillRect(x+1,y+1,68,38);
+    line(c,x+2,y+2,x+66,y+2,`hsla(43,30%,80%,${.07+rng()*.04})`);
+    line(c,x+68,y+4,x+68,y+36,'#151816',1);
+    for(let t=0;t<7;t++) {c.fillStyle=rng()>.5?'#ffffff06':'#00000018';c.fillRect(x+rng()*68,y+rng()*38,2+rng()*6,1);}
+  }
+  c.restore();
+}
+function door(c,x,y,w,h,open,seed) {
+  c.save(); arch(c,x-13,y-13,w+26,h+13);c.fillStyle='#746958';c.fill();c.strokeStyle='#282820';c.lineWidth=4;c.stroke();
+  arch(c,x-5,y-5,w+10,h+5);c.strokeStyle='#b2a17c';c.lineWidth=2;c.stroke();
+  arch(c,x,y,w,h);c.fillStyle=open?'#141d22':'#2d241c';c.fill();c.save();c.clip();
+  if(open) {
+    const g=c.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,'#090f13');g.addColorStop(1,'#3b4a43');c.fillStyle=g;c.fillRect(x,y-20,w,h+30);
+    for(let i=0;i<5;i++){c.strokeStyle='#5b655638';c.strokeRect(x+12+i*10,y+50+i*20,w-24-i*20,h-30);}
+    poly(c,[[x,y+h],[x+w*.48,y+h*.6],[x+w*.65,y+h*.6],[x+w,y+h]],'#88744c28');
+  } else {
+    const rng=random(seed);
+    for(let xx=x;xx<x+w;xx+=13){c.fillStyle=`hsl(28 27% ${18+rng()*9}%)`;c.fillRect(xx,y-20,11,h+30);line(c,xx+2,y,xx+2,y+h,'#d3ac6720');}
+    for(const yy of [y+h*.45,y+h*.8]) {c.fillStyle='#171c1b';c.fillRect(x,yy,w,8);for(let xx=x+8;xx<x+w;xx+=22)ellipse(c,xx,yy+4,2,2,'#80745b');}
+    c.strokeStyle='#c7a663';c.lineWidth=3;c.beginPath();c.arc(x+w*.72,y+h*.62,7,0,Math.PI*2);c.stroke();
+    c.shadowColor='#d8bd75';c.shadowBlur=12;poly(c,[[x+w*.5,y+37],[x+w*.5+7,y+48],[x+w*.5,y+59],[x+w*.5-7,y+48]],'#d5bf82');c.shadowBlur=0;
+  }
+  c.restore();
+  for(let i=0;i<5;i++)line(c,x-13,y+w*.5+i*30,x-1,y+w*.5+i*30,'#34352c',2);
+  c.restore();
+}
+function windowArch(c,x,y,w,h) {
+  arch(c,x-8,y-8,w+16,h+8);c.fillStyle='#807664';c.fill();arch(c,x,y,w,h);c.fillStyle='#314858';c.fill();
+  c.save();c.clip();const sky=c.createLinearGradient(0,y,0,y+h);sky.addColorStop(0,'#182c41');sky.addColorStop(1,'#7a8990');c.fillStyle=sky;c.fillRect(x,y-20,w,h+30);
+  ellipse(c,x+w*.68,y+h*.27,13,13,'#e3ddbc');ellipse(c,x+w*.75,y+h*.23,12,12,'#283e50');
+  poly(c,[[x-5,y+h],[x+w*.1,y+h*.65],[x+w*.3,y+h*.8],[x+w*.7,y+h*.6],[x+w,y+h*.78],[x+w+5,y+h]],'#202e39');
+  line(c,x+w/2,y-20,x+w/2,y+h,'#9d947d',7);line(c,x,y+h*.48,x+w,y+h*.48,'#9d947d',7);c.restore();
+}
+function torch(c,x,y,t) {
+  const glow=c.createRadialGradient(x,y,0,x,y,95);glow.addColorStop(0,'#ffba5438');glow.addColorStop(.4,'#eea44815');glow.addColorStop(1,'#ffbe5400');c.fillStyle=glow;c.fillRect(x-95,y-95,190,190);
+  c.fillStyle='#171c1a';c.fillRect(x-6,y+11,12,48);c.fillStyle='#947751';c.fillRect(x-3,y+12,6,33);ellipse(c,x,y+14,13,5,'#383627');
+  c.save();c.shadowColor='#ffc062';c.shadowBlur=22;
+  poly(c,[[x-9,y+13],[x-13,y-2],[x-3,y-16],[x+2+Math.sin(t)*3,y-32],[x+7,y-8],[x+13,y],[x+8,y+13]],'#d99038');
+  poly(c,[[x-5,y+12],[x-6,y],[x+2,y-14],[x+7,y+7],[x+3,y+15]],'#ffe2a1');c.restore();
+}
+function portrait(c, person, x,y,scale=1) {
+  c.save();c.translate(x,y);c.scale(scale,scale);
+  ellipse(c,0,128,49,11,'#00000045');
+  poly(c,[[-34,14],[-51,97],[-43,126],[41,126],[50,97],[31,14]],person.color,'#292520');
+  poly(c,[[-13,17],[-7,57],[0,72],[9,55],[15,17]],'#d7caa6');
+  poly(c,[[-34,16],[-16,7],[-1,77],[-28,97]],'#ffffff12');
+  poly(c,[[34,16],[16,7],[1,77],[28,97]],'#00000022');
+  c.fillStyle='#493d2b';c.fillRect(-39,83,78,8);c.strokeStyle='#c3a667';c.lineWidth=3;c.strokeRect(-7,82,14,10);
+  c.fillStyle=person.skin;c.fillRect(-10,-2,20,23);
+  ellipse(c,0,-26,27,37,person.hair);ellipse(c,0,-22,22,30,person.skin);
+  ellipse(c,-21,-19,4,7,person.skin);ellipse(c,21,-19,4,7,person.skin);
+  poly(c,[[-26,-32],[-22,-54],[-3,-63],[20,-52],[27,-31],[11,-40],[4,-48],[-5,-34]],person.hair);
+  line(c,-15,-26,-5,-27,'#49372b',2);line(c,5,-27,15,-26,'#49372b',2);
+  ellipse(c,-10,-22,2,2,'#202522');ellipse(c,10,-22,2,2,'#202522');line(c,0,-18,-2,-10,'#694638',1.5);
+  c.beginPath();c.arc(0,-9,8,.2,Math.PI-.2);c.strokeStyle='#6c4737';c.lineWidth=1.8;c.stroke();
+  if(person.kind==='scholar') {
+    c.strokeStyle='#c9b581';c.lineWidth=1.5;for(const xx of [-10,10]){c.beginPath();c.arc(xx,-21,8,0,Math.PI*2);c.stroke();}line(c,-2,-21,2,-21,'#c9b581',1.5);
+    poly(c,[[-30,40],[0,45],[0,81],[-30,73]],'#b99254','#382d23');poly(c,[[0,45],[30,40],[30,73],[0,81]],'#dfcd9e','#382d23');
+    for(let yy=48;yy<71;yy+=6)line(c,5,yy,23,yy-2,'#998558',1);
+    ellipse(c,-30,61,6,10,person.skin);ellipse(c,30,61,6,10,person.skin);
+  }else if(person.kind==='wizard') {
+    poly(c,[[-37,-50],[0,-108],[29,-50]],person.color,'#323243');ellipse(c,-3,-50,42,8,person.color);poly(c,[[0,1],[-17,-5],[0,46],[18,-5]],person.hair);
+    line(c,44,-39,44,123,'#897148',7);ellipse(c,44,-44,10,13,'#91c3c0');
+  }else if(person.kind==='knight') {
+    poly(c,[[-29,-29],[-28,-56],[0,-72],[28,-56],[29,-29],[22,-34],[20,-49],[-20,-49],[-22,-34]],'#989f96','#414d4a');
+    poly(c,[[8,45],[52,45],[49,90],[30,111],[9,90]],'#4f6262','#c3b389');poly(c,[[30,53],[38,70],[30,91],[22,70]],'#bdab73');
+  }else if(person.kind==='bard') {
+    ellipse(c,15,61,24,31,'#b18a4f');ellipse(c,15,61,9,10,'#393225');line(c,20,48,40,2,'#be9e61',10);for(let k=0;k<3;k++)line(c,13+k*3,83,38+k,6,'#e3d4a2',.7);
+  }else if(person.kind==='gardener') {
+    ellipse(c,-2,-49,43,9,'#af9153');poly(c,[[-24,-51],[-18,-77],[13,-77],[26,-51]],'#b69e63');line(c,40,-7,40,120,'#9d875e',5);
+  }else {
+    poly(c,[[-33,-48],[-9,-76],[20,-72],[32,-44]],person.color);ellipse(c,0,-44,40,7,person.color);
+    c.fillStyle='#bdab77';c.fillRect(-27,43,43,31);line(c,-18,48,8,64,'#887754',2);line(c,-24,66,3,48,'#887754',1);
+  }
+  c.restore();
+}
+function drawPortrait(canvas,person) {
+  const c=canvas.getContext('2d');c.clearRect(0,0,canvas.width,canvas.height);
+  const g=c.createRadialGradient(70,75,1,70,75,95);g.addColorStop(0,'#625443');g.addColorStop(1,'#252d28');c.fillStyle=g;c.fillRect(0,0,canvas.width,canvas.height);
+  portrait(c,person,canvas.width/2,canvas.height*.55,.95);
+}
+function drawRoom(canvas,state,t=0) {
+  const c=canvas.getContext('2d'),w=canvas.width,h=canvas.height;
+  c.save();c.scale(w/960,h/560);
+  const rng=random(state.seed+state.pos*1231+state.floor),person=inhabitantFor(state);
+  c.fillStyle='#171c19';c.fillRect(0,0,960,560);
+  masonry(c,[[230,108],[730,108],[730,365],[230,365]],rng,4);
+  masonry(c,[[0,0],[230,108],[230,365],[0,560]],rng,-3);
+  masonry(c,[[960,0],[730,108],[730,365],[960,560]],rng,-5);
+  poly(c,[[0,0],[960,0],[730,108],[230,108]],'#252c28');
+  for(let i=0;i<5;i++){c.beginPath();c.moveTo(i*240,0);c.quadraticCurveTo(480,30,230+i*125,108);c.strokeStyle='#4c5042';c.lineWidth=7;c.stroke();}
+  const floor=c.createLinearGradient(0,365,0,560);floor.addColorStop(0,'#4d493b');floor.addColorStop(1,'#242c28');c.fillStyle=floor;poly(c,[[230,365],[730,365],[960,560],[0,560]],floor);
+  for(const yy of [374,390,412,444,490,558])line(c,0,yy,960,yy,'#131b18',3);
+  for(let x=-960;x<1900;x+=180)line(c,480,330,x,560,'#131b18',2);
+  poly(c,[[433,370],[527,370],[614,560],[346,560]],'#3e5750');poly(c,[[440,370],[520,370],[601,560],[359,560]],'#385048');
+  line(c,439,370,357,560,'#b39a594f',2);line(c,521,370,603,560,'#b39a594f',2);
+  for(let y=400;y<560;y+=35){const size=(y-330)*.09;poly(c,[[480,y-size],[480+size,y],[480,y+size],[480-size,y]],null,'#b79d604f');}
+  // Heavy corner pillars and a ribbed vault frame the room.
+  for(const x of [215,730]) {
+    const g=c.createLinearGradient(x,0,x+18,0);g.addColorStop(0,'#7b7560');g.addColorStop(.5,'#575b4b');g.addColorStop(1,'#252d27');c.fillStyle=g;c.fillRect(x,100,18,276);
+    c.fillStyle='#817963';c.fillRect(x-7,101,32,13);c.fillRect(x-8,356,33,16);
+    for(let y=122;y<350;y+=45)line(c,x,y,x+18,y,'#2c332a',2);
+  }
+  c.strokeStyle='#7a7560';c.lineWidth=12;c.beginPath();c.moveTo(230,113);c.bezierCurveTo(350,87,410,42,480,26);c.bezierCurveTo(550,42,610,87,730,113);c.stroke();
+  c.strokeStyle='#a19572';c.lineWidth=2;c.stroke();
+  const doors=exits(state);
+  const north=doors.find(d=>d.id==='n');
+  if(north)door(c,418,160,124,211,north.open,state.pos);else windowArch(c,439,151,82,164);
+  const west=doors.find(d=>d.id==='w');
+  if(west){c.save();c.transform(1,-.22,0,1,0,35);door(c,57,197,105,227,west.open,state.pos+1);c.restore();}
+  else {c.save();c.transform(1,-.2,0,1,0,40);windowArch(c,58,166,82,180);c.restore();}
+  const east=doors.find(d=>d.id==='e');
+  if(east){c.save();c.transform(1,.22,0,1,0,-176);door(c,798,197,105,227,east.open,state.pos+2);c.restore();}
+  else {c.save();c.transform(1,.2,0,1,0,-155);windowArch(c,820,166,82,180);c.restore();}
+  // A framed atlas: a clickable invitation to read beyond the room.
+  c.fillStyle='#272820';c.fillRect(270,166,94,124);c.fillStyle='#a08850';c.fillRect(274,170,86,116);c.fillStyle='#293b36';c.fillRect(279,175,76,106);
+  c.strokeStyle='#b9b180';c.lineWidth=1;c.beginPath();c.arc(317,221,27,0,Math.PI*2);c.stroke();c.beginPath();c.ellipse(317,221,12,27,0,0,Math.PI*2);c.stroke();line(c,290,221,344,221,'#b9b180');line(c,317,194,317,248,'#b9b180');
+  for(let i=0;i<10;i++)ellipse(c,286+rng()*64,179+rng()*92,.6,.6,'#d2b980');
+  c.fillStyle='#81744e';c.fillRect(296,263,42,3);
+  // Cloth banner with an original lantern emblem.
+  poly(c,[[615,133],[681,133],[681,280],[648,298],[615,280]],person.color,'#222a24');
+  line(c,611,132,686,132,'#ac945e',5);line(c,621,140,621,278,'#d4bc7d50',1);line(c,675,140,675,278,'#d4bc7d50',1);
+  c.strokeStyle='#dfcb91';c.lineWidth=2;c.strokeRect(637,184,23,30);poly(c,[[633,184],[648,174],[664,184]],null,'#dfcb91');line(c,634,217,663,217,'#dfcb91',2);ellipse(c,648,201,4,7,'#e0c887');
+  torch(c,383,225,t);torch(c,577,225,t+2);
+  // Shelves in the foreground, varying spines from a stable room seed.
+  c.fillStyle='#27261e';c.fillRect(250,319,118,56);c.fillStyle='#665037';c.fillRect(245,315,129,7);
+  for(let i=0;i<13;i++){const bh=21+rng()*22;c.fillStyle=['#756146','#5d735e','#815549','#666583'][i%4];c.fillRect(254+i*8,364-bh,6,bh);line(c,255+i*8,368-bh,259+i*8,368-bh,'#c7b579',1);}
+  c.fillStyle='#705a3d';c.fillRect(246,365,127,6);
+  portrait(c,person,657,334,.79);
+  // Cool window light across the floor, warm falloff in the corners.
+  poly(c,[[700,364],[787,332],[960,440],[877,560]],'#9aa89908');
+  const vignette=c.createRadialGradient(480,295,110,480,295,600);vignette.addColorStop(0,'#00000000');vignette.addColorStop(.75,'#07100d30');vignette.addColorStop(1,'#050c09b0');c.fillStyle=vignette;c.fillRect(0,0,960,560);
+  for(let i=0;i<1000;i++){c.fillStyle=i%2?'#edd9a507':'#040b0714';c.fillRect(rng()*960,rng()*560,1,1);}
+  c.restore();
+}
+function drawMap(canvas,state,route=[]) {
+  const c=canvas.getContext('2d');const cell=canvas.width/SIZE;
+  c.clearRect(0,0,canvas.width,canvas.height);c.fillStyle='#cbbd92';c.fillRect(0,0,canvas.width,canvas.height);
+  const visited=new Set(state.visited), revealed=new Set([...state.visited,...route]);
+  for(let n=0;n<100;n++){
+    const x=n%10*cell,y=Math.floor(n/10)*cell;
+    c.fillStyle=visited.has(n)?'#eee1b6':route.includes(n)?'#d6c68d':'#b1a785';c.fillRect(x+1,y+1,cell-2,cell-2);
+    if(!revealed.has(n)){ellipse(c,x+cell/2,y+cell/2,1,1,'#918b70');continue;}
+    const ns=state.maze[n];
+    for(const [a,b,neighbor] of [ [[x,y],[x+cell,y],n-10],[[x+cell,y],[x+cell,y+cell],n+1],[[x,y+cell],[x+cell,y+cell],n+10],[[x,y],[x,y+cell],n-1] ]){
+      if(!ns.includes(neighbor))line(c,...a,...b,'#70674d',2);
+      else if(!state.unlocked.includes([Math.min(n,neighbor),Math.max(n,neighbor)].join(':'))){const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2;ellipse(c,mx,my,1.7,1.7,'#ad8755');}
+    }
+  }
+  if(route.length){c.strokeStyle='#b27a31';c.lineWidth=3;c.setLineDash([3,3]);c.beginPath();route.forEach((n,i)=>{const x=(n%10+.5)*cell,y=(Math.floor(n/10)+.5)*cell;i?c.lineTo(x,y):c.moveTo(x,y);});c.stroke();c.setLineDash([]);}
+  const sx=(state.exit%10)*cell,sy=Math.floor(state.exit/10)*cell;
+  for(let i=0;i<4;i++){c.fillStyle='#7e6436';c.fillRect(sx+5+i*3,sy+cell-6-i*4,4,3+i*4);}
+  const px=(state.pos%10+.5)*cell,py=(Math.floor(state.pos/10)+.5)*cell;
+  ellipse(c,px,py,cell*.28,cell*.28,'#3a5b4b');poly(c,[[px,py-cell*.25],[px+cell*.18,py+cell*.16],[px-cell*.18,py+cell*.16]],'#fff5d4');
+}
+
+// wiki.js
+const cache = new Map();
+const endpoint = 'https://en.wikipedia.org/w/api.php';
+async function wikiRequest(params, signal) {
+  const timeout = AbortSignal.timeout(8000);
+  const combined = signal ? AbortSignal.any([signal, timeout]) : timeout;
+  const url = new URL(endpoint);
+  for (const [k,v] of Object.entries({action:'query',format:'json',formatversion:2,origin:'*',...params})) url.searchParams.set(k,String(v));
+  const response = await fetch(url, {signal:combined,credentials:'omit'});
+  if (!response.ok) throw new Error(`Wikipedia returned ${response.status}`);
+  const data = await response.json();
+  if (data.error) throw new Error(data.error.info || 'Wikipedia is unavailable');
+  return data;
+}
+async function article(title, signal) {
+  if (cache.has(title)) return cache.get(title);
+  const data = await wikiRequest({prop:'extracts|info',inprop:'url',exintro:1,explaintext:1,exchars:4500,redirects:1,titles:title},signal);
+  const page = data.query?.pages?.find(p=>!p.missing && p.extract);
+  if (!page) throw new Error('No article extract found');
+  const result = {title:page.title, text:page.extract, url:sourceURL(page.title), revision:page.lastrevid};
+  cache.set(title,result);
+  return result;
+}
+async function searchArticles(query, signal) {
+  const data=await wikiRequest({list:'search',srsearch:query,srlimit:8,srprop:''},signal);
+  return data.query?.search?.map(p=>p.title) || [];
+}
+
+// audio.js
+// Original, quiet synthesized chimes. No audio files or external services.
+class CastleSound {
+  constructor(){this.enabled=false;this.context=null;this.interval=null;}
+  async toggle(){
+    if(this.enabled){this.enabled=false;clearInterval(this.interval);await this.context?.suspend();return false;}
+    const Audio=globalThis.AudioContext||globalThis.webkitAudioContext;
+    if(!Audio) return false;
+    this.context ||= new Audio();
+    await this.context.resume();this.enabled=true;this.ambient();
+    this.interval=setInterval(()=>{if(!document.hidden)this.ambient();},11000);
+    return true;
+  }
+  note(frequency,delay=0,duration=.6,volume=.035){
+    if(!this.enabled||!this.context)return;
+    const c=this.context,osc=c.createOscillator(),gain=c.createGain(),start=c.currentTime+delay;
+    osc.type='sine';osc.frequency.value=frequency;
+    gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(volume,start+.05);gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
+    osc.connect(gain);gain.connect(c.destination);osc.start(start);osc.stop(start+duration+.1);
+  }
+  ambient(){[146.83,220,293.66,329.63,293.66,220].forEach((n,i)=>this.note(n,i*.6,2.5,.012));}
+  door(){this.note(196,0,.3,.035);this.note(293.66,.15,.5,.025);}
+  correct(){[293.66,369.99,440].forEach((n,i)=>this.note(n,i*.12,.8,.04));}
+  wrong(){this.note(164.81,0,.3,.025);}
+  win(){[293.66,369.99,440,587.33].forEach((n,i)=>this.note(n,i*.3,1.8,.04));}
+}
+
+// app.js
+const $=id=>document.getElementById(id);
+const SAVE_KEY='remindmaze.lanternlight.v1';
+const sound=new CastleSound();
+const categories=CATEGORIES.map(c=>c.id);
+let state,hasJourney=false,saveAvailable=true,dialogueIndex=0,route=[],routeUntil=0,readerAbort,toastTimeout;
+try{
+  const saved=JSON.parse(localStorage.getItem(SAVE_KEY));
+  if(saved && validSave(saved,QUESTIONS,categories)){state=saved;hasJourney=true;}
+  else if(saved) setTimeout(()=>toast('This saved journey could not be read. Start a new journey or import a backup.'),250);
+}catch{saveAvailable=false;}
+state ||= newGame({},482613);
+function save(){
+  if(!hasJourney)return;
+  try{localStorage.setItem(SAVE_KEY,JSON.stringify(state));saveAvailable=true;$('save-status').textContent='Journey saved on this device. Export a backup in your journal.';}
+  catch{saveAvailable=false;$('save-status').textContent='Browser saving is unavailable. Export your journey from the journal.';}
+}
+function toast(message){$('toast').textContent=message;$('toast').classList.add('visible');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>$('toast').classList.remove('visible'),4200);}
+function openDialog(id){if(!$(id).open)$(id).showModal();}
+function closeDialog(id){if($(id).open)$(id).close();}
+function button(text,cls,fn){const b=document.createElement('button');b.className=cls;b.textContent=text;b.addEventListener('click',fn);return b;}
+function text(tag,content,cls=''){const e=document.createElement(tag);e.textContent=content;e.className=cls;return e;}
+function link(label,url){const a=document.createElement('a');a.textContent=label;a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;}
+const roman=n=>n<=10?['','I','II','III','IV','V','VI','VII','VIII','IX','X'][n]:String(n);
+function render(){
+  const p=inhabitantFor(state),room=`${String.fromCharCode(65+state.pos%10)}${Math.floor(state.pos/10)+1}`;
+  $('journey-label').textContent=hasJourney?`${state.name}’s journey · ${TIERS[state.difficulty-1]} · ${state.mode==='study'?'Study pace':'Classic pace'}`:'A castle of questions. A world to discover.';
+  $('floor-heading').textContent=`FLOOR ${roman(state.floor)} · ${state.won?'THE AWAKENED CASTLE':'THE FORGOTTEN HALLS'}`;
+  $('room-title').textContent=p.room;
+  $('room-coordinates').textContent=`ROOM ${room} · FACING NORTH`;
+  $('room').setAttribute('aria-label',`${p.room}, facing north. Available doors: ${exits(state).map(d=>d.label+(d.open?' open':' locked')).join(', ')}. ${p.name}, ${p.role}, is here.`);
+  $('scene-label').textContent=state.pos===state.exit?'THE STAIRWAY TO THE NEXT CHAPTER':state.won?'THE CASTLE REMEMBERS':'THE CURSE OF FORGETTING';
+  $('person-name').textContent=p.name.toUpperCase();$('person-role').textContent=p.role.toUpperCase();$('dialogue-text').textContent=p.lines[dialogueIndex%p.lines.length];
+  $('person-hotspot-label').textContent=`Speak to ${p.name}`;$('person-button').setAttribute('aria-label',`Speak to ${p.name}, ${p.role}`);$('portrait-button').setAttribute('aria-label',`Speak to ${p.name}, ${p.role}`);
+  $('door-hotspots').replaceChildren();$('direction-buttons').replaceChildren();
+  const symbols={n:'↑',e:'→',s:'↓',w:'←'};
+  for(const d of exits(state)){
+    const b=button('',`hotspot door-${d.id}`,()=>move(d.to));
+    b.append(text('span',`${symbols[d.id]} ${d.label}${d.open?' · open':''}`));b.setAttribute('aria-label',`${d.open?'Walk':'Unlock'} ${d.label.toLowerCase()} door`);b.disabled=state.won;
+    $('door-hotspots').append(b);
+  }
+  for(const id of ['w','n','s','e']){
+    const d=exits(state).find(e=>e.id===id);if(!d)continue;
+    const b=button(`${symbols[id]} ${d.label}`,`direction-button${d.open?' open':''}`,()=>move(d.to));b.title=d.open?'This door is open':'Answer a question to unlock';b.disabled=state.won;$('direction-buttons').append(b);
+  }
+  $('stairs-button').hidden=state.pos!==state.exit||state.won;
+  $('stairs-button').textContent=state.score>=state.goal?'Enter the throne room ↗':'Ascend the stairs ↗';
+  $('scene-hint').textContent=state.won?'The castle remembers. Your discoveries are safe in the journal.':state.pos===state.exit?'The stairway is here. Continue exploring, or climb to the next chapter.':'Choose a doorway. Every answer opens a little more of the world.';
+  $('map-floor').textContent=String(state.floor).padStart(2,'0');
+  $('map').setAttribute('aria-label',`Floor ${state.floor} map. You are in room ${room}. Stairs are at ${String.fromCharCode(65+state.exit%10)}${Math.floor(state.exit/10)+1}. ${state.visited.length} of 100 rooms explored.`);
+  $('score').textContent=state.score.toLocaleString();$('score-goal').textContent=`/ ${state.goal.toLocaleString()}`;
+  $('score-fill').style.width=`${Math.min(100,state.score/state.goal*100)}%`;
+  $('score-progress').setAttribute('aria-valuemax',state.goal);$('score-progress').setAttribute('aria-valuenow',Math.min(state.goal,state.score));
+  $('rooms-count').textContent=state.visited.length;$('answers-count').textContent=state.solved;
+  $('quest-text').textContent=state.won?'The curse is lifted. The world is yours to discover.':state.score>=state.goal?'The spell is weakening. Find the stairs to finish your journey.':'Gather knowledge. Find the stairs. Break the spell.';
+  $('torch-count').textContent=`${state.torches} / 5`;$('torch-button').disabled=state.torches===0||Date.now()<routeUntil||state.won;
+  if(!route.length)$('map-note').textContent=state.torches?'Five lights for the whole journey.':'Your lights are spent. Trust your map.';
+  drawRoom($('room'),state,Date.now()/600);drawMap($('map'),state,route);drawPortrait($('portrait'),p);
+  if(!saveAvailable)$('save-status').textContent='Browser saving is unavailable. Export your journey from the journal.';
+}
+function refreshRoute(){if(Date.now()<routeUntil)route=pathTo(state.maze,state.pos,state.exit);else{route=[];routeUntil=0;}}
+function move(to){
+  if(!hasJourney){openWelcome();return;}
+  if(state.pending){showQuestion();return;}
+  const result=beginDoor(state,to,QUESTIONS);save();
+  if(result==='moved'){dialogueIndex=0;refreshRoute();sound.door();render();}
+  else if(result==='question')showQuestion();
+}
+function moveDirection(id){const d=exits(state).find(d=>d.id===id);if(d)move(d.to);}
+function showQuestion(){renderQuestion();openDialog('question-dialog');}
+function renderQuestion(){
+  const p=state.pending;if(!p)return;
+  const q=QUESTIONS.find(q=>q.id===p.id),cat=CATEGORIES.find(c=>c.id===q.category);
+  const dir=exits(state).find(d=>d.to===p.to);
+  $('question-category').textContent=`${cat.symbol} ${cat.name.toUpperCase()}`;$('question-tier').textContent=`${roman(q.level)} · ${TIERS[q.level-1]}`;
+  $('question-context').textContent=`A question guards the ${dir.label.toLowerCase()} door.`;$('question-title').textContent=q.prompt;
+  $('answers').replaceChildren();p.options.forEach((choice,i)=>{
+    const cls=p.status!=='asking'&&choice===q.answer?' correct':p.wrong.includes(choice)?' wrong':'';
+    const b=button('',`answer-button${cls}`,()=>chooseAnswer(choice));b.append(text('kbd',i+1),text('span',choice));
+    b.disabled=p.status!=='asking'||p.wrong.includes(choice);if(cls===' correct')b.setAttribute('aria-label',`${choice}, correct answer`);$('answers').append(b);
+  });
+  const feedback=$('answer-feedback');feedback.className=`answer-feedback${p.wrong.length&&p.status!=='correct'?' error':''}`;
+  feedback.textContent=p.status==='correct'?`The door remembers. +${p.payout} points. ${q.explanation}`:p.status==='failed'?`The answer is ${q.answer}. ${q.explanation}`:p.wrong.length?'Not quite. One more attempt—or take a look in the reading room.':'';
+  $('question-next').hidden=p.status==='asking';$('question-next').textContent=p.status==='correct'?'Open the door →':'Try a new question →';
+  $('question-foot').textContent=p.researched?'Research helps the castle remember. Base points still count; the speed bonus is waived.':'Two attempts. No loss of accumulated points. Keys 1–4 choose an answer.';
+  updateMeter();
+}
+function updateMeter(){
+  const p=state.pending;if(!p)return;const q=QUESTIONS.find(q=>q.id===p.id);
+  $('points-available').textContent=p.status==='correct'?`${p.payout} points earned`:p.status==='failed'?'A little wiser already':`${pointsFor(state,q)} points available`;
+  const bonus=state.mode==='classic'&&!p.researched;
+  $('bonus-fill').style.width=`${bonus?Math.max(0,100-p.elapsed/500):100}%`;
+  $('timer-label').textContent=bonus?`${Math.max(0,50-Math.floor(p.elapsed/1000))}s bonus`:(p.researched?'Research pace':'No timer');
+}
+function chooseAnswer(choice){
+  const result=answer(state,choice,QUESTIONS);if(!result)return;
+  result==='correct'?sound.correct():sound.wrong();save();renderQuestion();render();
+  if(result!=='asking')$('question-next').focus();
+}
+function leaveQuestion(){state.pending=null;save();closeDialog('question-dialog');render();}
+$('leave-question').onclick=leaveQuestion;
+$('question-dialog').addEventListener('cancel',event=>{event.preventDefault();leaveQuestion();});
+$('question-next').onclick=()=>{
+  const p=state.pending;if(!p)return;
+  if(p.status==='correct'){enter(state,p.to);dialogueIndex=0;refreshRoute();sound.door();closeDialog('question-dialog');save();render();}
+  else if(p.status==='failed'){const to=p.to;state.pending=null;beginDoor(state,to,QUESTIONS);save();renderQuestion();$('answers').querySelector('button').focus();}
+};
+function talk(){dialogueIndex++;$('dialogue-text').textContent=inhabitantFor(state).lines[dialogueIndex%3];}
+for(const id of ['talk-button','person-button','portrait-button'])$(id).onclick=talk;
+$('torch-button').onclick=()=>{
+  if(Date.now()<routeUntil||!hasJourney)return;
+  route=useTorch(state);if(!route.length)return;routeUntil=Date.now()+12000;sound.note(440,0,1,.025);save();render();
+  const next=route[1],d=exits(state).find(d=>d.to===next);toast(d?`The torch points ${d.label.toLowerCase()}. Follow the gold trail on your map.`:'The stairs are in this room.');
+};
+$('stairs-button').onclick=()=>{
+  const result=ascend(state);if(!result)return;dialogueIndex=0;route=[];routeUntil=0;save();render();
+  if(result==='won'){sound.win();showWin();}else{sound.door();toast(`Floor ${state.floor}. New halls, new possibilities.`);}
+};
+function showWin(){
+  $('win-stats').textContent=`${state.name} · ${state.score.toLocaleString()} points · ${state.solved} doors unlocked · ${state.floor} ${state.floor===1?'floor':'floors'}`;openDialog('win-dialog');
+}
+function openWelcome(){
+  $('continue-button').hidden=!hasJourney;$('close-welcome').hidden=!hasJourney;$('start-button').firstChild.textContent=hasJourney?'Begin a new journey ':'Enter the castle ';
+  if(hasJourney){$('traveler-name').value=state.name;$('start-form').elements.difficulty.value=state.difficulty;$('start-form').elements.goal.value=state.goal;$('start-form').elements.mode.value=state.mode;for(const input of document.querySelectorAll('input[name="category"]'))input.checked=!state.categories.length||state.categories.includes(input.value);}
+  openDialog('welcome-dialog');
+}
+for(const c of CATEGORIES){
+  const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.name='category';input.value=c.id;input.checked=true;label.append(input,text('span',c.symbol),document.createTextNode(c.name));$('category-options').append(label);
+}
+$('select-all').onclick=()=>{for(const i of document.querySelectorAll('input[name="category"]'))i.checked=true;};
+$('start-form').onsubmit=event=>{
+  event.preventDefault();const form=new FormData(event.currentTarget),selected=form.getAll('category');
+  if(!selected.length){toast('Choose at least one subject for your journey.');document.querySelector('input[name="category"]').focus();return;}
+  if(hasJourney&&!state.won&&!confirm('Begin a new journey? This replaces the saved journey on this device. You can export a backup in the journal first.'))return;
+  state=newGame({name:form.get('name'),difficulty:Number(form.get('difficulty')),goal:Number(form.get('goal')),mode:form.get('mode'),categories:selected});
+  hasJourney=true;dialogueIndex=0;route=[];routeUntil=0;save();closeDialog('welcome-dialog');render();sound.door();
+};
+function resume(){closeDialog('welcome-dialog');if(state.pending)showQuestion();else if(state.won)showWin();}
+$('continue-button').onclick=resume;$('close-welcome').onclick=resume;
+$('welcome-dialog').addEventListener('cancel',e=>{e.preventDefault();if(hasJourney)resume();});
+$('menu-button').onclick=openWelcome;
+$('new-journey').onclick=()=>{closeDialog('win-dialog');openWelcome();};
+$('help-button').onclick=()=>openDialog('help-dialog');
+for(const b of document.querySelectorAll('[data-close]'))b.onclick=()=>closeDialog(b.dataset.close);
+$('reader-dialog').addEventListener('close',()=>readerAbort?.abort());
+function prepareReader(){
+  readerAbort?.abort();readerAbort=new AbortController();
+  if(state.pending?.status==='asking'){state.pending.researched=true;save();renderQuestion();}
+  $('reader-links').replaceChildren();openDialog('reader-dialog');return readerAbort.signal;
+}
+function sourceLinks(title,revision){
+  $('reader-links').replaceChildren(link('Read the full article ↗',sourceURL(title)),link('Contributors & history ↗',`https://en.wikipedia.org/w/index.php?title=${encodeURIComponent(title)}&action=history`));
+  if(revision)$('reader-links').append(link('This revision ↗',`https://en.wikipedia.org/w/index.php?oldid=${revision}`));
+}
+async function readArticle(title){
+  const signal=prepareReader();$('reader-title').textContent=title;$('article-search').value=title;$('reader-content').replaceChildren(text('p','Opening the encyclopedia…','reader-status'));sourceLinks(title);
+  try{
+    const page=await article(title,signal);if(signal.aborted)return;
+    $('reader-title').textContent=page.title;$('reader-content').replaceChildren(text('p','FROM WIKIPEDIA · INTRODUCTORY EXTRACT','reader-status'),text('p',page.text));sourceLinks(page.title,page.revision);
+  }catch{
+    if(signal.aborted)return;
+    const notes=QUESTIONS.filter(q=>q.source===title).map(q=>q.explanation);
+    $('reader-content').replaceChildren(text('p','Wikipedia could not be reached. You can keep playing. The full article link is below.','reader-status'));
+    if(notes.length)$('reader-content').append(text('h3','Notes from the castle’s collection'),text('p',notes.join('\n\n')));
+    else $('reader-content').append(text('p','Try again when you are connected, or choose a subject from the castle collection.'));
+  }
+}
+function openLibrary(){
+  prepareReader();$('reader-title').textContent='Follow your curiosity.';$('article-search').value='';
+  $('reader-content').replaceChildren(text('p','A question is only the beginning. Search Wikipedia, or open a book from the castle’s collection.','reader-status'));
+  const list=document.createElement('div');list.className='reader-results';
+  for(const c of CATEGORIES){const q=QUESTIONS.find(q=>q.category===c.id);list.append(button(`${c.symbol} ${q.source}`,'',()=>readArticle(q.source)));}$('reader-content').append(list);
+}
+$('search-form').onsubmit=async e=>{
+  e.preventDefault();const query=$('article-search').value.trim();if(!query)return;
+  const signal=prepareReader();$('reader-title').textContent='Searching the shelves…';$('reader-content').replaceChildren(text('p','Searching Wikipedia…','reader-status'));
+  try{
+    const results=await searchArticles(query,signal);if(signal.aborted)return;
+    $('reader-title').textContent='Where shall we wander?';const list=document.createElement('div');list.className='reader-results';results.forEach(title=>list.append(button(title,'',()=>readArticle(title))));
+    $('reader-content').replaceChildren(text('p',results.length?'Choose an article to read.':'No matches found. Try another name or spelling.','reader-status'),list);
+  }catch{if(!signal.aborted){$('reader-title').textContent='The shelves are out of reach.';$('reader-content').replaceChildren(text('p','Wikipedia search is unavailable right now. The castle’s questions still work.','reader-status'));$('reader-links').replaceChildren(link('Search on Wikipedia ↗',`https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(query)}`));}}
+};
+$('research-question').onclick=()=>{if(state.pending)readArticle(QUESTIONS.find(q=>q.id===state.pending.id).source);};
+$('painting-button').onclick=()=>readArticle(inhabitantFor(state).source);$('library-button').onclick=openLibrary;
+function openJournal(){
+  $('journal-summary').textContent=`${state.solved} doors unlocked · ${state.attempts} answers given · ${state.score.toLocaleString()} points. Your most recent 200 discoveries are kept here.`;
+  $('journal-entries').replaceChildren();
+  if(!state.journal.length)$('journal-entries').append(text('p','An empty page, a waiting castle. Your discoveries will appear here.'));
+  for(const j of state.journal){
+    const q=QUESTIONS.find(q=>q.id===j.id),entry=document.createElement('article');entry.className='journal-entry';
+    entry.append(text('p',`${j.correct?'DOOR UNLOCKED':'SOMETHING LEARNED'} · FLOOR ${j.floor} · ${j.points} POINTS`),text('h3',q.prompt),text('p',`${q.answer}. ${q.explanation}`),button(`Read: ${q.source} ↗`,'text-button',()=>readArticle(q.source)));$('journal-entries').append(entry);
+  }
+  $('export-save').disabled=!hasJourney;openDialog('journal-dialog');
+}
+$('journal-button').onclick=openJournal;$('win-journal').onclick=()=>{closeDialog('win-dialog');openJournal();};
+$('export-save').onclick=()=>{
+  if(!hasJourney)return;const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='reMindMaze-journey.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+$('import-save').onchange=async e=>{
+  const file=e.target.files[0];if(!file)return;
+  try{
+    if(file.size>1000000)throw new Error('This file is too large to be a journey.');
+    const imported=JSON.parse(await file.text());if(!validSave(imported,QUESTIONS,categories))throw new Error('This is not a compatible reMindMaze journey.');
+    if(hasJourney&&!confirm('Replace the current journey with this saved journey?'))return;
+    state=imported;hasJourney=true;route=[];routeUntil=0;dialogueIndex=0;save();closeDialog('journal-dialog');render();if(state.pending)showQuestion();else if(state.won)showWin();toast('Your journey has been restored.');
+  }catch(err){$('import-status').textContent=err instanceof SyntaxError?'That file could not be read as a journey.':err.message;}
+  finally{e.target.value='';}
+};
+$('sound-button').onclick=async()=>{
+  try{const on=await sound.toggle();$('sound-state').textContent=on?'on':'off';$('sound-button').setAttribute('aria-label',`Turn sound ${on?'off':'on'}`);$('sound-button').title=`Turn sound ${on?'off':'on'}`;}
+  catch{toast('Audio is unavailable in this browser.');}
+};
+document.addEventListener('keydown',e=>{
+  if(e.altKey||e.ctrlKey||e.metaKey||e.repeat||['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;
+  const opened=[...document.querySelectorAll('dialog[open]')];
+  if(opened.length){
+    if($('question-dialog').open&&!$('reader-dialog').open&&/^[1-4]$/.test(e.key)){e.preventDefault();$('answers').children[Number(e.key)-1]?.click();}return;
+  }
+  const dirs={ArrowUp:'n',ArrowRight:'e',ArrowDown:'s',ArrowLeft:'w',w:'n',d:'e',s:'s',a:'w'};
+  if(dirs[e.key]){e.preventDefault();moveDirection(dirs[e.key]);}
+  else if(e.key.toLowerCase()==='t')$('torch-button').click();else if(e.key.toLowerCase()==='j')openJournal();else if(e.key.toLowerCase()==='l')openLibrary();
+});
+let last=performance.now(),lastSaved=last;
+setInterval(()=>{
+  const now=performance.now(),delta=now-last;last=now;
+  if(document.hidden)return;
+  if(state.pending?.status==='asking'&&$('question-dialog').open&&!$('reader-dialog').open){state.pending.elapsed+=delta;updateMeter();}
+  if(route.length){const left=Math.ceil((routeUntil-Date.now())/1000);if(left<=0){route=[];routeUntil=0;render();}else{$('map-note').textContent=`The path glows for ${left} more seconds.`;$('torch-button').disabled=true;}}
+  if(now-lastSaved>5000){save();lastSaved=now;}
+},250);
+document.addEventListener('visibilitychange',()=>{last=performance.now();if(document.hidden)save();});
+window.addEventListener('pagehide',save);
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(()=>{if(!document.hidden&&!document.querySelector('dialog[open]'))drawRoom($('room'),state,Date.now()/600);},500);
+render();openWelcome();
+if('serviceWorker' in navigator && ['http:','https:'].includes(location.protocol))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+
+})();
+</script>
+</body>
+</html>
